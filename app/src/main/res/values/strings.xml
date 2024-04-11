@@ -17,4 +17,6 @@
     <string name="mydirectors">Мои режиссеры</string>
     <string name="valueofmovies">Количество фильмов:</string>
     <string name="logout_item">Выйти</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

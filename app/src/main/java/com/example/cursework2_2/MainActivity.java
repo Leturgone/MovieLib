@@ -1,5 +1,6 @@
 package com.example.cursework2_2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
+        user = auth.getCurrentUser();
+        if( user == null){
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         //Работа с тулбаром
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -45,12 +54,31 @@ public class MainActivity extends AppCompatActivity {
         //синхронизирует текущее состояние
         // drawerLayout (открыт или закрыт) с позицией связанной
         // с ним кнопки на панели действий (ActionBar).
+
+
         toggle.syncState();
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) {
             actionBar.setTitle("Моя фильмотека");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if(item.getItemId() == R.id.my_movies){
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
+                            new MoviesListFragment()).commit();
+                }
+                else if(item.getItemId() == R.id.logout){
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                return false;
+            }
+        });
 
 
 //        logOutButton = findViewById(R.id.logout_button);
