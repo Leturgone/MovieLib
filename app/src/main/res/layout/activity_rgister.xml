@@ -51,14 +51,19 @@
             android:hint="@string/password"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:id="@+id/regProgressBar"
+        android:layout_height="wrap_content"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/reg_btn_text"
-        android:id="@+id/login_button"/>
+        android:id="@+id/reg_button"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/reg_question"
-        android:id="@+id/on_reg_activity"/>
+        android:id="@+id/on_log_activity"/>
 </LinearLayout>

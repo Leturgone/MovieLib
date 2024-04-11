@@ -40,6 +40,10 @@
             android:hint="@string/password"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:id="@+id/logProgressBar"
+        android:layout_height="wrap_content"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
