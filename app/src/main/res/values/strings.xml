@@ -10,4 +10,11 @@
     <string name="reg_btn_text">Зарегистрироваться</string>
     <string name="login_question">Нет учетной записи?</string>
     <string name="logout">Выйти</string>
+    <string name="drawer_open">Открыт</string>
+    <string name="drawer_close">Закрыт</string>
+    <string name="mail">Почта</string>
+    <string name="mymovies">Моя фильмотека</string>
+    <string name="mydirectors">Мои режиссеры</string>
+    <string name="valueofmovies">Количество фильмов:</string>
+    <string name="logout_item">Выйти</string>
 </resources>
