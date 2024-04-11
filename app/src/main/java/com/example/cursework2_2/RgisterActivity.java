@@ -25,7 +25,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class RgisterActivity extends AppCompatActivity {
     private TextInputEditText editTextEmail;
     private TextInputEditText editTextPassword;
-    private TextInputEditText editTextName;
     private Button regButton;
     private Button onLogButton;
     private FirebaseAuth mAuth;
@@ -39,7 +38,6 @@ public class RgisterActivity extends AppCompatActivity {
         //Связь переменных с xml
         editTextEmail = findViewById(R.id.email_input);
         editTextPassword = findViewById(R.id.password_input);
-        editTextName = findViewById(R.id.username_input);
         regButton = findViewById(R.id.reg_button);
         onLogButton = findViewById(R.id.on_log_activity);
         progressBar = findViewById(R.id.regProgressBar);
@@ -54,14 +52,9 @@ public class RgisterActivity extends AppCompatActivity {
                 String email, password, name;
                 email = editTextEmail.getText().toString();
                 password = editTextPassword.getText().toString();
-                name = editTextName.getText().toString();
 
                 //Проверка на пустые поля
 
-                if (TextUtils.isEmpty(name)){
-                    Toast.makeText(RgisterActivity.this,"Введите имя",Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 if (TextUtils.isEmpty(email)){
                     Toast.makeText(RgisterActivity.this,"Введите почту",Toast.LENGTH_SHORT).show();
                     return;
