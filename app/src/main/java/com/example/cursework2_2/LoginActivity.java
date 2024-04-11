@@ -52,13 +52,12 @@ public class LoginActivity extends AppCompatActivity {
         logButton = findViewById(R.id.login_button);
         onRegButton = findViewById(R.id.on_reg_activity);
         progressBar = findViewById(R.id.logProgressBar);
-
+        progressBar.setVisibility(View.GONE);
         //Реализация кнопок
         logButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                progressBar.setVisibility(View.VISIBLE);
                 //Получение данных с полей ввода
 
                 String email, password, name;
@@ -74,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(password)){
                     Toast.makeText(LoginActivity.this,"Введите пароль",Toast.LENGTH_SHORT).show();
                 }
+                progressBar.setVisibility(View.VISIBLE);
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override

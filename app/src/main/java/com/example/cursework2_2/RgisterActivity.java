@@ -49,7 +49,6 @@ public class RgisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                progressBar.setVisibility(View.VISIBLE);
                 //Получение данных с полей ввода
 
                 String email, password, name;
@@ -70,6 +69,7 @@ public class RgisterActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(password)){
                     Toast.makeText(RgisterActivity.this,"Введите пароль",Toast.LENGTH_SHORT).show();
                 }
+                progressBar.setVisibility(View.VISIBLE);
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -79,6 +79,9 @@ public class RgisterActivity extends AppCompatActivity {
 
                                     Toast.makeText(RgisterActivity.this, "Учетная запись создана.",
                                             Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(RgisterActivity.this,LoginActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                 } else {
                                     Toast.makeText(RgisterActivity.this, "Ошибка в создании учетной записи.",
                                             Toast.LENGTH_SHORT).show();
