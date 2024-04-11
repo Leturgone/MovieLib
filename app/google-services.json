@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "981116517477",
+    "project_id": "work-login-firebase",
+    "storage_bucket": "work-login-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981116517477:android:7e7ae2807104f73a52da8c",
+        "android_client_info": {
+          "package_name": "com.example.cursework2_2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfWui-M-3FryjfqU52AAy2C_cpHVWC_5Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
