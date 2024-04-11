@@ -9,4 +9,5 @@
     <string name="username">Имя</string>
     <string name="reg_btn_text">Зарегистрироваться</string>
     <string name="login_question">Нет учетной записи?</string>
+    <string name="logout">Выйти</string>
 </resources>

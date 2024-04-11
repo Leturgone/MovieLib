@@ -58,6 +58,7 @@ public class RgisterActivity extends AppCompatActivity {
                 name = editTextName.getText().toString();
 
                 //Проверка на пустые поля
+
                 if (TextUtils.isEmpty(name)){
                     Toast.makeText(RgisterActivity.this,"Введите имя",Toast.LENGTH_SHORT).show();
                     return;
