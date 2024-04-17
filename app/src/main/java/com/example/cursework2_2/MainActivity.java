@@ -80,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        //Начальный фрагмент
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
+                new MoviesListFragment()).commit();
+
 
 
 //        logOutButton = findViewById(R.id.logout_button);
