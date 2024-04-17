@@ -35,11 +35,12 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         user = auth.getCurrentUser();
-        if( user == null){
-            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        //Чтоб открывалось
+//        if( user == null){
+//            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
 
         //Работа с тулбаром
         toolbar = findViewById(R.id.toolbar);

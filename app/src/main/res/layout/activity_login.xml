@@ -54,4 +54,9 @@
         android:layout_height="wrap_content"
         android:text="@string/login_question"
         android:id="@+id/on_reg_activity"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Моя любимая кнопка"
+        android:id="@+id/love_button"/>
 </LinearLayout>
