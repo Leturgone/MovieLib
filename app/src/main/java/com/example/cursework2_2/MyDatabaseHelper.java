@@ -19,6 +19,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_YEAR ="movie_year";
     private static final String COLUMN_DESCRIPTION ="movie_description";
     private static final String COLUMN_POSTER ="movie_poster";
+    private static  final String COLUMN_LEGTH = "movie_length";
 
     public MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -33,7 +34,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_DIRECTOR + " TEXT, "+
                 COLUMN_YEAR + " TEXT, "+
                 COLUMN_DESCRIPTION + " TEXT, "+
-                COLUMN_POSTER + " BLOB);";
+                COLUMN_POSTER + " BLOB, "+
+                COLUMN_LEGTH+ " TEXT);";
         db.execSQL(query);
     }
 
