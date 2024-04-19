@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private Context context;
+    private static String DATABASE_PATH; // полный путь к базе данных
     private static final String DATABASE_NAME = "MovieBase.db"; //название бд
     private static final int DATABASE_VERSION = 1; //версия бд
 
@@ -24,6 +25,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
+        DATABASE_PATH =context.getFilesDir().getPath() + DATABASE_PATH;
     }
 
     @Override
