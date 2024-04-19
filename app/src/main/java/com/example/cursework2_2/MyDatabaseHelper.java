@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -33,7 +34,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
-        DATABASE_PATH = context.getApplicationInfo().dataDir + "/databases/" + DATABASE_NAME;
+        DATABASE_PATH = context.getDatabasePath(DATABASE_NAME).getAbsolutePath();// Путь до databases
     }
 
     @Override

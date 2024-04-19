@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         // с ним кнопки на панели действий (ActionBar).
 
         //Получаем Базу данных
-        MyDatabaseHelper databaseHelper = new MyDatabaseHelper(MainActivity.this);
+        MyDatabaseHelper databaseHelper = new MyDatabaseHelper(getApplicationContext());
         databaseHelper.create_db();
 
 
