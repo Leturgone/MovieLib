@@ -56,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
         // drawerLayout (открыт или закрыт) с позицией связанной
         // с ним кнопки на панели действий (ActionBar).
 
+        //Получаем Базу данных
+        MyDatabaseHelper databaseHelper = new MyDatabaseHelper(MainActivity.this);
+        databaseHelper.create_db();
+
 
         toggle.syncState();
         ActionBar actionBar = getSupportActionBar();
