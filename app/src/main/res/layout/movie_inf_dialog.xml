@@ -20,10 +20,13 @@
 
     <TextView
         android:id="@+id/infTitleTextView"
-        android:layout_width="231dp"
-        android:layout_height="31dp"
+        android:layout_width="313dp"
+        android:layout_height="35dp"
         android:layout_marginTop="44dp"
+        android:gravity="center"
         android:text="Название фильма"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/infPosterImageView" />
@@ -35,7 +38,7 @@
         android:text="2012"
         app:layout_constraintBottom_toBottomOf="@+id/infTitleTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.562"
+        app:layout_constraintHorizontal_bias="0.354"
         app:layout_constraintStart_toEndOf="@+id/infTitleTextView"
         app:layout_constraintTop_toTopOf="@+id/infTitleTextView"
         app:layout_constraintVertical_bias="1.0" />
@@ -45,7 +48,7 @@
         android:layout_width="163dp"
         android:layout_height="19dp"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:text="Имя режиссера"
         app:layout_constraintStart_toEndOf="@+id/infDirectorDirectortextView"
         app:layout_constraintTop_toBottomOf="@+id/infTitleTextView" />
@@ -55,24 +58,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:text="Режиссер: "
-        app:layout_constraintBottom_toTopOf="@+id/LengthLengthView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/infTitleTextView"
-        app:layout_constraintVertical_bias="0.032" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/infDescriptTextView"
+    <ScrollView
         android:layout_width="288dp"
         android:layout_height="157dp"
-        android:text="Описание фильма"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/infLengthtextView"
-        app:layout_constraintVertical_bias="0.701" />
+        app:layout_constraintVertical_bias="0.701">
+
+        <TextView
+            android:id="@+id/infDescriptTextView"
+            android:layout_width="288dp"
+            android:layout_height="157dp"
+            android:text="Описание фильма"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/infLengthtextView"
+            app:layout_constraintVertical_bias="0.701" />
+
+    </ScrollView>
+
 
     <TextView
         android:id="@+id/LengthLengthView"
@@ -81,9 +97,9 @@
         android:layout_marginTop="8dp"
         android:text="Хронометраж:"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintHorizontal_bias="0.253"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infDirectorTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/infDirectorDirectortextView" />
 
     <TextView
         android:id="@+id/infLengthtextView"
