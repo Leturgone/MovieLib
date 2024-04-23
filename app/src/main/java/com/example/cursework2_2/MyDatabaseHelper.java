@@ -1,5 +1,6 @@
 package com.example.cursework2_2;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -29,7 +30,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_YEAR ="movie_year";
     private static final String COLUMN_DESCRIPTION ="movie_description";
     private static final String COLUMN_POSTER ="movie_poster";
-    private static  final String COLUMN_LEGTH = "movie_length";
+    private static  final String COLUMN_LENGTH = "movie_length";
 
     public MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -84,5 +85,20 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME); //удаляет таблицу
         onCreate(db);
+    }
+
+    public  boolean addMovie(Movie movie){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_TITLE,movie.getMovie_title());
+        cv.put(COLUMN_DIRECTOR,movie.getMovie_director());
+        cv.put(COLUMN_YEAR,movie.getMovie_year());
+        cv.put(COLUMN_DESCRIPTION,movie.getMovie_description());
+        cv.put(COLUMN_POSTER,ImageToBlob(movie.getMovie_poster()));
+        cv.put(COLUMN_LENGTH,movie.getMovie_length());
+        long result = db.insert(TABLE_NAME,null,cv);
+        db.close();
+        return  result !=-1;
+
     }
 }
