@@ -80,7 +80,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
     }
     public SQLiteDatabase open()throws SQLException {
-
         return SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READWRITE);
     }
 
@@ -93,6 +92,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+
+    //Метод для добавления фильма
     public  boolean addMovie(Movie movie){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -107,12 +108,16 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return  result !=-1;
 
     }
+
+    //Метод для удаления фильма
     public  boolean deleteMovie(String title, String year){
         SQLiteDatabase db = this.getWritableDatabase();
         int result = db.delete(TABLE_NAME, COLUMN_TITLE + " =? AND+ "+ COLUMN_YEAR + " =?", new String[] { title, year });
         db.close();
         return result >0;
     }
+
+    //Метод для поиска фильма
     public Movie findMovie(String title, String year){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME,
@@ -137,6 +142,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return null;
     }
+
+    //Метод для получения списка всех фильмов
     public List<Movie> getAllMovies(){
         List<Movie> movieList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -159,6 +166,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return movieList;
     }
+
+    //Метод для обновления фильма
     public boolean updateMovie(String old_title, String old_year,String new_title, String new_director, String new_year,String new_description, Bitmap new_poster,String new_length){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -174,12 +183,15 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return  result >0;
 
     }
+
+    //Метод для преобразовния картинки в BLOB
     private byte[] ImageToBlob(Bitmap bitmap){
         // Преобразование Bitmap в массив байтов
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
         return bos.toByteArray();
     }
+    //Метод для преобразования BLOB в картинку
     private  Bitmap BlobToImage(byte[] image){
         // Преобразование массива байтов в Bitmap
         Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
