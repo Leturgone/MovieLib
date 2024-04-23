@@ -1,5 +1,7 @@
 package com.example.cursework2_2;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,12 +51,31 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.blind(movies.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Dialog dialog = new Dialog(v.getContext());
+                dialog.setContentView(R.layout.movie_inf_dialog);
 
+                Movie selected_movie = movies.get(position);
+
+                TextView MovieTitle = dialog.findViewById(R.id.infTitleTextView);
+                TextView Director = dialog.findViewById(R.id.infDirectorTextView);
+                TextView Year = dialog.findViewById(R.id.infDateTextView);
+                TextView Description = dialog.findViewById(R.id.infDescriptTextView);
+                TextView Length = dialog.findViewById(R.id.infLengthtextView);
+                ImageView Poster = dialog.findViewById(R.id.infPosterImageView);
+
+                MovieTitle.setText(selected_movie.getMovie_title());
+                Director.setText(selected_movie.getMovie_director());
+                Year.setText(selected_movie.getMovie_year());
+                Description.setText(selected_movie.getMovie_description());
+                Length.setText(selected_movie.getMovie_length());
+                Poster.setImageBitmap(selected_movie.getMovie_poster());
+
+                dialog.show();
             }
         });
     }
