@@ -1,6 +1,10 @@
 package com.example.cursework2_2;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,23 +13,29 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
 
 public class MoviesListFragment extends Fragment {
     EditText editMovieTitle, editDirector, editYear, editDescription, editLength, editOldTitle, editOldYear;
-    Button saveButton, bidAddButton;
+    Button saveButton;
+    FloatingActionButton bidAddButton;
     ImageView editImage;
     MyDatabaseHelper myDB;
     RecyclerView movieList;
     List<Movie> movies;
+    private final  int GALLERY_REQUEST_CODE = 1000;
 
     public MoviesListFragment() {
         // Required empty public constructor
@@ -75,12 +85,65 @@ public class MoviesListFragment extends Fragment {
                 editLength = dialog.findViewById(R.id.editLength);
                 editImage = dialog.findViewById(R.id.imgGallery);
                 saveButton = dialog.findViewById(R.id.save_button);
+
+                saveButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String title = editMovieTitle.getText().toString();
+                        String director = editDirector.getText().toString();
+                        String year = editYear.getText().toString();
+                        String description = editDescription.getText().toString();
+                        String length = editLength.getText().toString();
+                        try {
+                            BitmapDrawable drawable = (BitmapDrawable) editImage.getDrawable();
+                            Movie movie = new Movie(0,title,director,year,description,drawable.getBitmap(),length);
+                            if (myDB.addMovie(movie)){
+                                movies.add(movie);
+                                adapter.notifyItemInserted(movies.size() - 1);
+                                refreshMoviesList(myDB,movies,adapter,movieList);
+                                Toast.makeText(getActivity(), "Фильм сохранен", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                            else{
+                                Toast.makeText(getActivity(), "Ошибка при сохранении", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }catch (ClassCastException e){
+                            // Обработка исключения
+                            e.printStackTrace();
+
+                            // Показать уведомление пользователю
+                            Toast.makeText(getActivity(), "Ошибка загрузки изображения", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                editImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent iGallery = new Intent(Intent.ACTION_PICK);
+                        iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(iGallery, GALLERY_REQUEST_CODE);
+                    }
+                });
+
+                dialog.show();
             }
         });
 
 
 
 
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode==RESULT_OK){
+            if (requestCode == GALLERY_REQUEST_CODE){
+                //Для галлереи
+                editImage.setImageURI(data.getData());
+            }
+        }
     }
     private void refreshMoviesList(MyDatabaseHelper dbHelper,
                                    List<Movie> movies, MovieAdapter adapter, RecyclerView

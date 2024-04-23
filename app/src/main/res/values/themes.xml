@@ -4,6 +4,7 @@
         <item name="colorPrimary">@color/red</item>
         <item name="android:background">@color/gray</item>
         <item name="android:textColor">@color/some_white</item>
+        <item name="android:textColorHint">@color/some_white</item>
     </style>
 
     <style name="Theme.CurseWork2_2" parent="Base.Theme.CurseWork2_2" />
