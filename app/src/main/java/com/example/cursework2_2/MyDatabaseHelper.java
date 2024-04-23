@@ -7,6 +7,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
 
@@ -178,6 +179,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
         return bos.toByteArray();
+    }
+    private  Bitmap BlobToImage(byte[] image){
+        // Преобразование массива байтов в Bitmap
+        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+        return bitmap;
     }
 
 }
