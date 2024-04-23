@@ -17,6 +17,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private Context context;
@@ -133,4 +135,27 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return null;
     }
+    public List<Movie> getAllMovies(){
+        List<Movie> movieList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " +
+                TABLE_NAME, null);
+        if(cursor.moveToFirst()){
+            do{
+                int id = cursor.getInt(0);
+                String m_title = cursor.getString(1);
+                String m_director = cursor.getString(2);
+                String m_year = cursor.getString(3);
+                String m_description = cursor.getString(4);
+                Bitmap m_poster = BlobToImage(cursor.getBlob(5));
+                String m_length = cursor.getString(6);
+                Movie movie = new Movie(id, m_title, m_director, m_year,m_description, m_poster,m_length);
+                movieList.add(movie);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return movieList;
+    }
+
 }
