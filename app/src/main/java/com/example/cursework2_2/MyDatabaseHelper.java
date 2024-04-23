@@ -12,6 +12,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -171,6 +172,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return  result >0;
 
+    }
+    private byte[] ImageToBlob(Bitmap bitmap){
+        // Преобразование Bitmap в массив байтов
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+        return bos.toByteArray();
     }
 
 }
