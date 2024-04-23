@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="650dp">
+
+
+    <ImageView
+        android:id="@+id/infPosterImageView"
+        android:layout_width="198dp"
+        android:layout_height="260dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.061"
+        app:srcCompat="@drawable/ic_upload_image" />
+
+    <TextView
+        android:id="@+id/infTitleTextView"
+        android:layout_width="231dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="44dp"
+        android:text="Название фильма"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infPosterImageView" />
+
+    <TextView
+        android:id="@+id/infDateTextView"
+        android:layout_width="42dp"
+        android:layout_height="18dp"
+        android:text="2012"
+        app:layout_constraintBottom_toBottomOf="@+id/infTitleTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.562"
+        app:layout_constraintStart_toEndOf="@+id/infTitleTextView"
+        app:layout_constraintTop_toTopOf="@+id/infTitleTextView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/infDirectorTextView"
+        android:layout_width="163dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="28dp"
+        android:text="Имя режиссера"
+        app:layout_constraintStart_toEndOf="@+id/infDirectorDirectortextView"
+        app:layout_constraintTop_toBottomOf="@+id/infTitleTextView" />
+
+    <TextView
+        android:id="@+id/infDirectorDirectortextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="28dp"
+        android:text="Режиссер: "
+        app:layout_constraintBottom_toTopOf="@+id/infDescriptTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infTitleTextView"
+        app:layout_constraintVertical_bias="0.032" />
+
+    <TextView
+        android:id="@+id/infDescriptTextView"
+        android:layout_width="288dp"
+        android:layout_height="157dp"
+        android:text="Описание фильма"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infDirectorTextView"
+        app:layout_constraintVertical_bias="0.432" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
