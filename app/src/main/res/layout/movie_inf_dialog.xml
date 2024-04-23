@@ -44,7 +44,7 @@
         android:id="@+id/infDirectorTextView"
         android:layout_width="163dp"
         android:layout_height="19dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="28dp"
         android:text="Имя режиссера"
         app:layout_constraintStart_toEndOf="@+id/infDirectorDirectortextView"
@@ -57,7 +57,7 @@
         android:layout_marginStart="80dp"
         android:layout_marginTop="28dp"
         android:text="Режиссер: "
-        app:layout_constraintBottom_toTopOf="@+id/infDescriptTextView"
+        app:layout_constraintBottom_toTopOf="@+id/LengthLengthView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/infTitleTextView"
         app:layout_constraintVertical_bias="0.032" />
@@ -69,9 +69,30 @@
         android:text="Описание фильма"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infDirectorTextView"
-        app:layout_constraintVertical_bias="0.432" />
+        app:layout_constraintTop_toBottomOf="@+id/infLengthtextView"
+        app:layout_constraintVertical_bias="0.701" />
+
+    <TextView
+        android:id="@+id/LengthLengthView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Хронометраж:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infDirectorTextView" />
+
+    <TextView
+        android:id="@+id/infLengthtextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Длительноть мин"
+        app:layout_constraintStart_toEndOf="@+id/LengthLengthView"
+        app:layout_constraintTop_toBottomOf="@+id/infDirectorTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
