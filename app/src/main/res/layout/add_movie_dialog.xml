@@ -24,28 +24,28 @@
         android:id="@+id/editDirector"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Режиссер"
-        android:textColor="@color/some_white"
         android:inputType="text"
+        android:textColor="@color/some_white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.005"
+        app:layout_constraintStart_toStartOf="@+id/editMovieTitle"
         app:layout_constraintTop_toBottomOf="@+id/editMovieTitle" />
 
     <EditText
         android:id="@+id/editYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Год"
-        android:textColor="@color/some_white"
         android:inputType="number"
+        android:textColor="@color/some_white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editDirector"
         app:layout_constraintTop_toBottomOf="@+id/editDirector" />
 
     <EditText
@@ -53,13 +53,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textColor="@color/some_white"
         android:ems="10"
         android:hint="Описание"
         android:inputType="text"
+        android:textColor="@color/some_white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editYear"
         app:layout_constraintTop_toBottomOf="@+id/editYear" />
 
     <EditText
@@ -72,22 +72,22 @@
         android:inputType="text"
         android:textColor="@color/some_white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editDescription"
         app:layout_constraintTop_toBottomOf="@+id/editDescription" />
 
     <ImageView
         android:id="@+id/imgGallery"
-        android:layout_width="157dp"
-        android:layout_height="205dp"
+        android:layout_width="133dp"
+        android:layout_height="172dp"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.394"
         app:layout_constraintStart_toEndOf="@+id/editDirector"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.031"
         app:srcCompat="@drawable/ic_upload_image" />
 
     <Button
@@ -97,9 +97,9 @@
         android:text="Сохранить"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.601"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editLength"
-        app:layout_constraintVertical_bias="0.344" />
+        app:layout_constraintVertical_bias="0.419" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
