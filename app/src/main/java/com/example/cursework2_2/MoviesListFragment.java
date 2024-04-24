@@ -163,6 +163,62 @@ public class MoviesListFragment extends Fragment {
                     }
                 });
 
+                updateButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String old_title = selected_movie.getMovie_title();
+                        String old_year = selected_movie.getMovie_year();
+
+                        String new_title = MovieTitle.getText().toString();
+                        String new_director = Director.getText().toString();
+                        String new_year = Year.getText().toString();
+                        String new_description = Description.getText().toString();
+                        String new_length = Length.getText().toString();
+                        if (new_title.equals("")){
+                            new_title = old_title;
+                        }
+                        if(new_director.equals("")){
+                            new_director= selected_movie.getMovie_director();
+                        }
+                        if(new_year.equals("")){
+                            new_year = selected_movie.getMovie_year();
+                        }
+                        if(new_description.equals("")){
+                            new_description = selected_movie.getMovie_description();
+                        }
+                        if(new_length.equals("")){
+                            new_length = selected_movie.getMovie_length();
+                        }
+                        try {
+                            BitmapDrawable drawable = (BitmapDrawable) Poster.getDrawable();
+                            if (myDB.updateMovie(
+
+                                    old_title, old_year, new_title, new_director, new_year, new_description, drawable.getBitmap(), new_length
+                            )) {
+                                Toast.makeText(getActivity(), "Данные фильма обновлены", Toast.LENGTH_SHORT).show();
+                                refreshMoviesList(myDB, movies, adapter, movieList);
+                                dialog.dismiss();
+                            } else {
+                                Toast.makeText(getActivity(), "Ошибка при обновлении", Toast.LENGTH_SHORT).show();
+                            }
+                        }catch (ClassCastException e){
+                            // Обработка исключения
+                            e.printStackTrace();
+
+                            // Показать уведомление пользователю
+                            Toast.makeText(getActivity(), "Ошибка загрузки изображения", Toast.LENGTH_SHORT).show();
+                        }
+
+
+                    }
+                });
+                deleteButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
                 dialog.show();
             }
         });
