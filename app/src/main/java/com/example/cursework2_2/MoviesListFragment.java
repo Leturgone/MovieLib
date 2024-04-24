@@ -130,6 +130,43 @@ public class MoviesListFragment extends Fragment {
             }
         });
 
+        adapter.setOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(int position) {
+                Dialog dialog = new Dialog(getActivity());
+                dialog.setContentView(R.layout.refactor_movie_dialog);
+                Movie selected_movie  = movies.get(position);
+
+                EditText MovieTitle = dialog.findViewById(R.id.REFeditMovieTitle);
+                EditText Director = dialog.findViewById(R.id.REFeditDirector);
+                EditText Year = dialog.findViewById(R.id.REFeditYear);
+                EditText Description = dialog.findViewById(R.id.REFeditDescription);
+                EditText Length = dialog.findViewById(R.id.REFeditLength);
+                ImageView Poster = dialog.findViewById(R.id.REFimgGallery);
+
+                Button updateButton = dialog.findViewById(R.id.update_button);
+                Button deleteButton = dialog.findViewById(R.id.delete_button);
+
+                //Установка полей
+                MovieTitle.setHint(selected_movie.getMovie_title());
+                Director.setHint(selected_movie.getMovie_director());
+                Year.setHint(selected_movie.getMovie_year());
+                Description.setHint(selected_movie.getMovie_description());
+                Length.setHint(selected_movie.getMovie_length());
+                Poster.setImageBitmap(selected_movie.getMovie_poster());
+                Poster.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent iGallery = new Intent(Intent.ACTION_PICK);
+                        iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(iGallery, GALLERY_REQUEST_CODE);
+                    }
+                });
+
+                dialog.show();
+            }
+        });
+
 
 
 

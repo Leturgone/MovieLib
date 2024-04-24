@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawer;
     private Toolbar toolbar;
-    private TextView ToolbarTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         //Работа с тулбаром
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ToolbarTitle = findViewById(R.id.textTitleView);
         drawer = findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
                 MainActivity.this, drawer, R.string.drawer_open, R.string.drawer_close);
@@ -69,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) {
             actionBar.setTitle("Моя фильмотека");
-            ToolbarTitle.setText("Моя фильмотека");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         NavigationView navigationView = findViewById(R.id.nav_view);
