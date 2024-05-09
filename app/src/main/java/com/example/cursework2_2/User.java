@@ -3,7 +3,16 @@ package com.example.cursework2_2;
 public class User {
     private int _id;
     private String user_login;
+    private String user_password;
     private String user_role;
+
+    public String getUser_password() {
+        return user_password;
+    }
+
+    public void setUser_password(String user_password) {
+        this.user_password = user_password;
+    }
 
     public User(int _id, String user_login, String user_role) {
         this._id = _id;

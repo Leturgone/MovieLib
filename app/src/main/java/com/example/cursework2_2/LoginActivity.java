@@ -26,25 +26,22 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText editTextPassword;
     private Button logButton;
     private Button onRegButton;
-    private FirebaseAuth mAuth;
     private ProgressBar progressBar;
 
     @Override
     public void onStart() {
         super.onStart();
-        // Проверка вошел ли пользователь в систему
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
+//        // Проверка вошел ли пользователь в систему
+//        if(currentUser != null){
+//            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mAuth = FirebaseAuth.getInstance();
 
         //Связь переменных с xml
         editTextEmail = findViewById(R.id.email_input);
@@ -75,23 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,"Введите пароль",Toast.LENGTH_SHORT).show();
                 }
                 progressBar.setVisibility(View.VISIBLE);
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(LoginActivity.this,"Вход выполнен",
-                                            Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Ошибка при входе.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+
             }
         });
 

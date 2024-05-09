@@ -19,6 +19,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +35,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String USERS_COLUMN_ID = "_id";
     private static  final String USERS_COLUMN_LOGIN = "user_login";
     private static  final String USERS_COLUMN_PASSWORD = "user_password";
-    private static  final String USRES_COLUMN_ROLE = "user_role";
+    private static  final String USERS_COLUMN_ROLE = "user_role";
     private static final String TABLE_NAME = "movie_libary"; // название таблицы в бд
     // названия столбцов
     private static final String COLUMN_ID ="_id";
@@ -83,6 +87,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME); //удаляет таблицу
+        db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE_NAME);
         onCreate(db);
     }
 
@@ -190,6 +195,32 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         // Преобразование массива байтов в Bitmap
         Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
         return bitmap;
+    }
+
+    public  boolean addUser(User user) throws NoSuchAlgorithmException {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(USERS_COLUMN_LOGIN, user.getUser_login());
+        String hash_password = hashPassword(user.getUser_password());
+        cv.put(USERS_COLUMN_PASSWORD,hash_password);
+        cv.put(USERS_COLUMN_ROLE,user.getUser_role());
+        long result = db.insert(USER_TABLE_NAME,null,cv);
+        db.close();
+        return  result !=-1;
+    }
+
+    private static String hashPassword(String password) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        byte[] hashInBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
+
+        // bytes to hex
+        String hashedPassword = new BigInteger(1, hashInBytes).toString(16);
+
+        while (hashedPassword.length() < 32) {
+            hashedPassword = "0" + hashedPassword;
+        }
+
+        return hashedPassword;
     }
 
 }
