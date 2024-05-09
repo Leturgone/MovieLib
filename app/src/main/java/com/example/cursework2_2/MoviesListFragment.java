@@ -163,6 +163,7 @@ public class MoviesListFragment extends Fragment {
                     }
                 });
 
+                //Кнопка для обновления информации о фильме
                 updateButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -212,10 +213,21 @@ public class MoviesListFragment extends Fragment {
 
                     }
                 });
+
+                //Кнопка для удаления информации о фильме
                 deleteButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        String title = selected_movie.getMovie_title();
+                        String year = selected_movie.getMovie_year();
+                        if(myDB.deleteMovie(title,year)){
+                            Toast.makeText(getActivity(), "Фильм удален", Toast.LENGTH_SHORT).show();
+                            refreshMoviesList(myDB, movies, adapter, movieList);
+                            dialog.dismiss();
+                        }
+                        else{
+                            Toast.makeText(getActivity(), "Ошибка при удалении", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 

@@ -27,7 +27,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static String DATABASE_PATH; // полный путь к базе данных
     private static final String DATABASE_NAME = "moviebase.db"; //название бд
     private static final int DATABASE_VERSION = 1; //версия бд
-
+    private static final String USER_TABLE_NAME = "users_base";
+    private static final String USERS_COLUMN_ID = "_id";
+    private static  final String USERS_COLUMN_LOGIN = "user_login";
+    private static  final String USERS_COLUMN_PASSWORD = "user_password";
+    private static  final String USRES_COLUMN_ROLE = "user_role";
     private static final String TABLE_NAME = "movie_libary"; // название таблицы в бд
     // названия столбцов
     private static final String COLUMN_ID ="_id";
@@ -46,16 +50,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-//        String query = "CREATE TABLE " + TABLE_NAME +
-//                " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-//                COLUMN_TITLE + " TEXT, "+
-//                COLUMN_DIRECTOR + " TEXT, "+
-//                COLUMN_YEAR + " TEXT, "+
-//                COLUMN_DESCRIPTION + " TEXT, "+
-//                COLUMN_POSTER + " BLOB, "+
-//                COLUMN_LEGTH+ " TEXT);";
-//        db.execSQL(query);
-
     }
 
     public  void create_db(){
