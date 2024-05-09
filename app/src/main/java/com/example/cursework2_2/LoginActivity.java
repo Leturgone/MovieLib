@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText editTextPassword;
     private Button logButton;
     private Button onRegButton;
+    private  User user;
     MyDatabaseHelper myDB;
     private ProgressBar progressBar;
 
@@ -75,7 +76,26 @@ public class LoginActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(password)){
                     Toast.makeText(LoginActivity.this,"Введите пароль",Toast.LENGTH_SHORT).show();
                 }
-                progressBar.setVisibility(View.VISIBLE);
+                if (!email.matches("^[A-Za-z0-9]+$") | email.matches("\\s")){
+                    Toast.makeText(LoginActivity.this,"Логин должен содержать только буквы и цифры, без пробелов",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (!password.matches("^[A-Za-z0-9]+$") | password.matches("\\s")){
+                    Toast.makeText(LoginActivity.this,"Пароль должен содержать только буквы и цифры, без пробелов",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                user = new User(0,email, password,"viewer");
+
+                if (myDB.chekUsername(user)){
+                    progressBar.setVisibility(View.VISIBLE);
+                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                    intent.putExtra("username",user.getUser_login());
+                    startActivity(intent);
+                    Toast.makeText(LoginActivity.this,"Регистрация выполнена успешно",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(LoginActivity.this,"Пользователь не найден",Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
