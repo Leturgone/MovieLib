@@ -86,6 +86,7 @@ public class RgisterActivity extends AppCompatActivity {
                         Toast.makeText(RgisterActivity.this, "Учетная запись создана.",
                                 Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RgisterActivity.this,MainActivity.class);
+                        intent.putExtra("username",user.getUser_login());
                         startActivity(intent);
                         finish();
                     }
