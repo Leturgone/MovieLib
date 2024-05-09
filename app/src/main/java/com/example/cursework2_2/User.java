@@ -14,9 +14,10 @@ public class User {
         this.user_password = user_password;
     }
 
-    public User(int _id, String user_login, String user_role) {
+    public User(int _id, String user_login, String password, String user_role) {
         this._id = _id;
         this.user_login = user_login;
+        this.user_password = password;
         this.user_role = user_role;
     }
 

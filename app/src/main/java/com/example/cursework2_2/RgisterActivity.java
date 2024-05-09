@@ -22,18 +22,21 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.security.NoSuchAlgorithmException;
+
 public class RgisterActivity extends AppCompatActivity {
     private TextInputEditText editTextEmail;
     private TextInputEditText editTextPassword;
     private Button regButton;
     private Button onLogButton;
-    private FirebaseAuth mAuth;
+    private User user;
+    private MyDatabaseHelper myDB;
     private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rgister);
-        mAuth = FirebaseAuth.getInstance();
+        myDB = new MyDatabaseHelper(RgisterActivity.this);
 
         //Связь переменных с xml
         editTextEmail = findViewById(R.id.email_input);
@@ -41,7 +44,7 @@ public class RgisterActivity extends AppCompatActivity {
         regButton = findViewById(R.id.reg_button);
         onLogButton = findViewById(R.id.on_log_activity);
         progressBar = findViewById(R.id.regProgressBar);
-
+        progressBar.setVisibility(View.INVISIBLE);
         //Реализация кнопок
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,24 +66,22 @@ public class RgisterActivity extends AppCompatActivity {
                     Toast.makeText(RgisterActivity.this,"Введите пароль",Toast.LENGTH_SHORT).show();
                 }
                 progressBar.setVisibility(View.VISIBLE);
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
-                                if (task.isSuccessful()) {
-
-                                    Toast.makeText(RgisterActivity.this, "Учетная запись создана.",
-                                            Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(RgisterActivity.this,LoginActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Toast.makeText(RgisterActivity.this, "Ошибка в создании учетной записи.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                user = new User(0,email, password,"viewer");
+                try {
+                    if(myDB.addUser(user)){
+                        Toast.makeText(RgisterActivity.this, "Учетная запись создана.",
+                                Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RgisterActivity.this,MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else{
+                        Toast.makeText(RgisterActivity.this, "Ошибка в создании учетной записи.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         onLogButton.setOnClickListener(new View.OnClickListener() {

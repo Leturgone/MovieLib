@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText editTextPassword;
     private Button logButton;
     private Button onRegButton;
+    MyDatabaseHelper myDB;
     private ProgressBar progressBar;
 
     @Override
@@ -42,6 +43,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        myDB = new MyDatabaseHelper(LoginActivity.this);
+
 
         //Связь переменных с xml
         editTextEmail = findViewById(R.id.email_input);
