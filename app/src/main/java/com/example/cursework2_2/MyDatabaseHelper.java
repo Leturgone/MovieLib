@@ -209,6 +209,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return  result !=-1;
     }
 
+    public boolean chekUsername(User user){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + USER_TABLE_NAME +
+                " WHERE "+ USERS_COLUMN_LOGIN + " =?" , new String[]{user.getUser_login()});
+        return cursor.getCount() > 0;
+    }
+
     private static String hashPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[] hashInBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));

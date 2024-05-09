@@ -64,9 +64,23 @@ public class RgisterActivity extends AppCompatActivity {
                 }
                 if (TextUtils.isEmpty(password)){
                     Toast.makeText(RgisterActivity.this,"Введите пароль",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!email.matches("^[A-Za-z0-9]+$") | email.matches("\\s")){
+                    Toast.makeText(RgisterActivity.this,"Логин должен содержать только буквы и цифры, без пробелов",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (!password.matches("^[A-Za-z0-9]+$") | password.matches("\\s")){
+                    Toast.makeText(RgisterActivity.this,"Пароль должен содержать только буквы и цифры, без пробелов",Toast.LENGTH_LONG).show();
+                    return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
+
                 user = new User(0,email, password,"viewer");
+                if(myDB.chekUsername(user)){
+                    Toast.makeText(RgisterActivity.this,"Имя занято",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 try {
                     if(myDB.addUser(user)){
                         Toast.makeText(RgisterActivity.this, "Учетная запись создана.",
