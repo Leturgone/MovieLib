@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -86,7 +87,10 @@ public class RgisterActivity extends AppCompatActivity {
                         Toast.makeText(RgisterActivity.this, "Учетная запись создана.",
                                 Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RgisterActivity.this,MainActivity.class);
-                        intent.putExtra("username",user.getUser_login());
+                        SharedPreferences sharedPreferences = getSharedPreferences("loginPref", MODE_PRIVATE);
+                        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                        myEdit.putString("username", user.getUser_login());
+                        myEdit.apply();
                         startActivity(intent);
                         finish();
                     }

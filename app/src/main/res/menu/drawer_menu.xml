@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/mail"
+        android:id="@+id/login_view"
         android:title="@string/mail"/>
     <item
         android:id="@+id/my_movies"
         android:title="@string/mymovies"/>
     <item
-        android:id="@+id/my_directors"
-        android:title="@string/mydirectors"/>
+        android:id="@+id/search_menu"
+        android:title="@string/search"/>
     <item
         android:id="@+id/value_of_movies"
         android:title="@string/valueofmovies"/>
     <item
-        android:id="@+id/logout"
+        android:id="@+id/logout_btn"
         android:title="@string/logout_item"/>
 
 

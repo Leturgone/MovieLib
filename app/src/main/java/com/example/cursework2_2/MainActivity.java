@@ -9,9 +9,11 @@ import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -25,8 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
     private Button logOutButton;
     private TextView UserDataView;
-    private FirebaseUser user;
-    private FirebaseAuth auth;
+
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawer;
     private Toolbar toolbar;
@@ -34,16 +35,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences sharedPreferences = getSharedPreferences("loginPref", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
 
-        auth = FirebaseAuth.getInstance();
-
-        user = auth.getCurrentUser();
-        //Чтоб открывалось
-//        if( user == null){
-//            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
+        if(TextUtils.isEmpty(username)){
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         //Работа с тулбаром
         toolbar = findViewById(R.id.toolbar);
@@ -77,8 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
                             new MoviesListFragment()).commit();
                 }
-                else if(item.getItemId() == R.id.logout){
-                    FirebaseAuth.getInstance().signOut();
+                else if(item.getItemId() == R.id.logout_btn){
                     Intent intent = new Intent(MainActivity.this,LoginActivity.class);
                     startActivity(intent);
                     finish();
@@ -90,10 +88,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
                 new MoviesListFragment()).commit();
 
-
-
-//        logOutButton = findViewById(R.id.logout_button);
-//        UserDataView = findViewById(R.id.textView);
+//        UserDataView = findViewById(R.id.login_view);
 //
 //        user = auth.getCurrentUser();
 //        if( user == null){
@@ -125,4 +120,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

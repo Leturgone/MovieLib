@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -27,18 +28,23 @@ public class LoginActivity extends AppCompatActivity {
     private Button logButton;
     private Button onRegButton;
     private  User user;
-    MyDatabaseHelper myDB;
+    private MyDatabaseHelper myDB;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor myEdit;
     private ProgressBar progressBar;
 
     @Override
     public void onStart() {
         super.onStart();
-//        // Проверка вошел ли пользователь в систему
-//        if(currentUser != null){
-//            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
+        sharedPreferences = getSharedPreferences("loginPref", MODE_PRIVATE);
+        myEdit = sharedPreferences.edit();
+
+        // Проверка вошел ли пользователь в систему
+        if(!TextUtils.isEmpty(sharedPreferences.getString("username", ""))){
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +95,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (myDB.chekUsername(user)){
                     progressBar.setVisibility(View.VISIBLE);
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                    intent.putExtra("username",user.getUser_login());
+                    SharedPreferences sharedPreferences = getSharedPreferences("loginPref", MODE_PRIVATE);
+                    SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                    myEdit.putString("username", user.getUser_login());
+                    myEdit.apply();
                     startActivity(intent);
                     Toast.makeText(LoginActivity.this,"Регистрация выполнена успешно",Toast.LENGTH_SHORT).show();
                 }
