@@ -14,6 +14,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
+
         toggle = new ActionBarDrawerToggle(
                 MainActivity.this, drawer, R.string.drawer_open, R.string.drawer_close);
         if (drawer != null){
@@ -68,7 +70,10 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setTitle("Моя фильмотека");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        //Установка имени пользователся в выдвижное меню
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        MenuItem menuItem = navigationView.getMenu().findItem(R.id.login_view);
+        menuItem.setTitle("Пользователь: " + username);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
