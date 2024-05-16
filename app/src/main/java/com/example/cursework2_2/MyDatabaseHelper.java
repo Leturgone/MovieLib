@@ -1,5 +1,6 @@
 package com.example.cursework2_2;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -222,6 +223,19 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM " + USER_TABLE_NAME +
                 " WHERE "+ USERS_COLUMN_LOGIN + " =? AND+ "+ USERS_COLUMN_PASSWORD + " =?", new String[]{user.getUser_login(), password});
         return cursor.getCount() > 0;
+    }
+    @SuppressLint("Range")
+    public String getRole(String username){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(USER_TABLE_NAME,
+                new String[]{USERS_COLUMN_ROLE}, USERS_COLUMN_LOGIN + " =?",
+                new String[]{String.valueOf(username)},
+                null, null, null, null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor.getString(cursor.getColumnIndex(USERS_COLUMN_ROLE));
     }
 
     private static String hashPassword(String password) throws NoSuchAlgorithmException {
