@@ -22,6 +22,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.security.NoSuchAlgorithmException;
+
 public class LoginActivity extends AppCompatActivity {
     private TextInputEditText editTextEmail;
     private TextInputEditText editTextPassword;
@@ -92,18 +94,23 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 user = new User(0,email, password,"viewer");
 
-                if (myDB.chekUsername(user)){
-                    progressBar.setVisibility(View.VISIBLE);
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                    SharedPreferences sharedPreferences = getSharedPreferences("loginPref", MODE_PRIVATE);
-                    SharedPreferences.Editor myEdit = sharedPreferences.edit();
-                    myEdit.putString("username", user.getUser_login());
-                    myEdit.apply();
-                    startActivity(intent);
-                    Toast.makeText(LoginActivity.this,"Регистрация выполнена успешно",Toast.LENGTH_SHORT).show();
-                }
-                else{
+                try {
+                    if (myDB.chekUser(user)){
+                        progressBar.setVisibility(View.VISIBLE);
+                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        SharedPreferences sharedPreferences = getSharedPreferences("loginPref", MODE_PRIVATE);
+                        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                        myEdit.putString("username", user.getUser_login());
+                        myEdit.apply();
+                        startActivity(intent);
+                        Toast.makeText(LoginActivity.this,"Вход выполнен успешно",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(LoginActivity.this,"Пользователь не найден",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (NoSuchAlgorithmException e) {
                     Toast.makeText(LoginActivity.this,"Пользователь не найден",Toast.LENGTH_SHORT).show();
+                    throw new RuntimeException(e);
                 }
 
             }

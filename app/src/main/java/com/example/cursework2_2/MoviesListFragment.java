@@ -1,9 +1,11 @@
 package com.example.cursework2_2;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
@@ -66,6 +68,9 @@ public class MoviesListFragment extends Fragment {
         movieList = view.findViewById(R.id.recyclerView);
         myDB = new MyDatabaseHelper(getActivity());
         movies = myDB.getAllMovies();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginPref", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", "");
+        String userRole = myDB.getRole(username);
         MovieAdapter adapter = new MovieAdapter(movies);
         movieList.setLayoutManager(new LinearLayoutManager(getActivity()));
         movieList.setAdapter(adapter);

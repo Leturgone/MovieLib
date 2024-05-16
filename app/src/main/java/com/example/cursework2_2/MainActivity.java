@@ -70,10 +70,12 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setTitle("Моя фильмотека");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
         //Установка имени пользователся в выдвижное меню
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         MenuItem menuItem = navigationView.getMenu().findItem(R.id.login_view);
         menuItem.setTitle("Пользователь: " + username);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
