@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item
         android:id="@+id/login_view"
-        android:title="@string/mail"/>
+        android:title="@string/mail"
+        android:textColor="@color/white"/>
     <item
         android:id="@+id/my_movies"
-        android:title="@string/mymovies"/>
+        android:title="@string/mymovies"
+        android:textColor="@color/white"/>
     <item
         android:id="@+id/search_menu"
-        android:title="@string/search"/>
+        android:title="@string/search"
+        android:textColor="@color/white"/>
     <item
         android:id="@+id/value_of_movies"
-        android:title="@string/valueofmovies"/>
+        android:title="@string/valueofmovies"
+        android:textColor="@color/white"/>
     <item
         android:id="@+id/logout_btn"
-        android:title="@string/logout_item"/>
+        android:title="@string/logout_item"
+        android:textColor="@color/white"/>
 
 
 </menu>
