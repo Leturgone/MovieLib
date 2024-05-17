@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         myDB = new MyDatabaseHelper(LoginActivity.this);
-
+        myDB.create_db();
 
         //Связь переменных с xml
         editTextEmail = findViewById(R.id.email_input);
