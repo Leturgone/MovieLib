@@ -59,9 +59,6 @@ public class MainActivity extends AppCompatActivity {
         // drawerLayout (открыт или закрыт) с позицией связанной
         // с ним кнопки на панели действий (ActionBar).
 
-        //Получаем Базу данных
-        MyDatabaseHelper databaseHelper = new MyDatabaseHelper(getApplicationContext());
-        databaseHelper.create_db();
 
 
         toggle.syncState();
@@ -98,29 +95,6 @@ public class MainActivity extends AppCompatActivity {
         //Начальный фрагмент
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
                 new MoviesListFragment()).commit();
-
-//        UserDataView = findViewById(R.id.login_view);
-//
-//        user = auth.getCurrentUser();
-//        if( user == null){
-//            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//        else{
-//            UserDataView.setText(user.getEmail());
-//        }
-//
-//        logOutButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                FirebaseAuth.getInstance().signOut();
-//                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-
 
     }
     // Обработка нажатия на иконку меню в ActionBar для открытия и закрытия Drawer
