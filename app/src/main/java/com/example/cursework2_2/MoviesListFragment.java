@@ -69,13 +69,19 @@ public class MoviesListFragment extends Fragment {
         myDB = new MyDatabaseHelper(getActivity());
         movies = myDB.getAllMovies();
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginPref", MODE_PRIVATE);
+        //Получаем роль
         String username = sharedPreferences.getString("username", "");
-        String userRole = myDB.getRole(username);
+
+
         MovieAdapter adapter = new MovieAdapter(movies);
         movieList.setLayoutManager(new LinearLayoutManager(getActivity()));
         movieList.setAdapter(adapter);
 
         bidAddButton = view.findViewById(R.id.add_button);
+        String userRole = myDB.getRole(username);
+        if(myDB.getRole(username).equals("viewer")){
+            bidAddButton.setVisibility(View.GONE);
+        }
         bidAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
