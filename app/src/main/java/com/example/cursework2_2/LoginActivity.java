@@ -81,14 +81,15 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,"Введите почту",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(password)){
-                    Toast.makeText(LoginActivity.this,"Введите пароль",Toast.LENGTH_SHORT).show();
-                }
-                if (!email.matches("^[A-Za-z0-9]+$") | email.matches("\\s")){
+                else if (!email.matches("^[A-Za-z0-9]+$") | email.matches("\\s")){
                     Toast.makeText(LoginActivity.this,"Логин должен содержать только буквы и цифры, без пробелов",Toast.LENGTH_LONG).show();
                     return;
                 }
-                if (!password.matches("^[A-Za-z0-9]+$") | password.matches("\\s")){
+                if (TextUtils.isEmpty(password)){
+                    Toast.makeText(LoginActivity.this,"Введите пароль",Toast.LENGTH_SHORT).show();
+                }
+
+                else if (!password.matches("^[A-Za-z0-9]+$") | password.matches("\\s")){
                     Toast.makeText(LoginActivity.this,"Пароль должен содержать только буквы и цифры, без пробелов",Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -106,10 +107,10 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this,"Вход выполнен успешно",Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(LoginActivity.this,"Пользователь не найден",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this,"Неверный логин или пароль",Toast.LENGTH_SHORT).show();
                     }
                 } catch (NoSuchAlgorithmException e) {
-                    Toast.makeText(LoginActivity.this,"Пользователь не найден",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"Неверный логин или пароль",Toast.LENGTH_SHORT).show();
                     throw new RuntimeException(e);
                 }
 

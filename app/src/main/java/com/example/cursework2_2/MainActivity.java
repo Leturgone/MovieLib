@@ -85,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if(item.getItemId() == R.id.logout_btn){
                     Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                    SharedPreferences sharedPreferences = getSharedPreferences("loginPref", MODE_PRIVATE);
+                    SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                    myEdit.putString("username", "");
+                    myEdit.apply();
                     startActivity(intent);
                     finish();
                 }
