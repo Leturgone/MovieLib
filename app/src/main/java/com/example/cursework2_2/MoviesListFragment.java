@@ -144,109 +144,108 @@ public class MoviesListFragment extends Fragment {
         adapter.setOnItemLongClickListener(new OnItemLongClickListener() {
             @Override
             public void onItemLongClick(int position) {
-                Dialog dialog = new Dialog(getActivity());
-                dialog.setContentView(R.layout.refactor_movie_dialog);
-                Movie selected_movie  = movies.get(position);
+                if(!myDB.getRole(username).equals("viewer")) {
+                    Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.refactor_movie_dialog);
+                    Movie selected_movie = movies.get(position);
 
-                EditText MovieTitle = dialog.findViewById(R.id.REFeditMovieTitle);
-                EditText Director = dialog.findViewById(R.id.REFeditDirector);
-                EditText Year = dialog.findViewById(R.id.REFeditYear);
-                EditText Description = dialog.findViewById(R.id.REFeditDescription);
-                EditText Length = dialog.findViewById(R.id.REFeditLength);
-                ImageView Poster = dialog.findViewById(R.id.REFimgGallery);
+                    EditText MovieTitle = dialog.findViewById(R.id.REFeditMovieTitle);
+                    EditText Director = dialog.findViewById(R.id.REFeditDirector);
+                    EditText Year = dialog.findViewById(R.id.REFeditYear);
+                    EditText Description = dialog.findViewById(R.id.REFeditDescription);
+                    EditText Length = dialog.findViewById(R.id.REFeditLength);
+                    ImageView Poster = dialog.findViewById(R.id.REFimgGallery);
 
-                Button updateButton = dialog.findViewById(R.id.update_button);
-                Button deleteButton = dialog.findViewById(R.id.delete_button);
+                    Button updateButton = dialog.findViewById(R.id.update_button);
+                    Button deleteButton = dialog.findViewById(R.id.delete_button);
 
-                //Установка полей
-                MovieTitle.setHint(selected_movie.getMovie_title());
-                Director.setHint(selected_movie.getMovie_director());
-                Year.setHint(selected_movie.getMovie_year());
-                Description.setHint(selected_movie.getMovie_description());
-                Length.setHint(selected_movie.getMovie_length());
-                Poster.setImageBitmap(selected_movie.getMovie_poster());
-                Poster.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent iGallery = new Intent(Intent.ACTION_PICK);
-                        iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(iGallery, GALLERY_REQUEST_CODE);
-                    }
-                });
-
-                //Кнопка для обновления информации о фильме
-                updateButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String old_title = selected_movie.getMovie_title();
-                        String old_year = selected_movie.getMovie_year();
-
-                        String new_title = MovieTitle.getText().toString();
-                        String new_director = Director.getText().toString();
-                        String new_year = Year.getText().toString();
-                        String new_description = Description.getText().toString();
-                        String new_length = Length.getText().toString();
-                        if (new_title.equals("")){
-                            new_title = old_title;
+                    //Установка полей
+                    MovieTitle.setHint(selected_movie.getMovie_title());
+                    Director.setHint(selected_movie.getMovie_director());
+                    Year.setHint(selected_movie.getMovie_year());
+                    Description.setHint(selected_movie.getMovie_description());
+                    Length.setHint(selected_movie.getMovie_length());
+                    Poster.setImageBitmap(selected_movie.getMovie_poster());
+                    Poster.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent iGallery = new Intent(Intent.ACTION_PICK);
+                            iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            startActivityForResult(iGallery, GALLERY_REQUEST_CODE);
                         }
-                        if(new_director.equals("")){
-                            new_director= selected_movie.getMovie_director();
-                        }
-                        if(new_year.equals("")){
-                            new_year = selected_movie.getMovie_year();
-                        }
-                        if(new_description.equals("")){
-                            new_description = selected_movie.getMovie_description();
-                        }
-                        if(new_length.equals("")){
-                            new_length = selected_movie.getMovie_length();
-                        }
-                        try {
-                            BitmapDrawable drawable = (BitmapDrawable) Poster.getDrawable();
-                            if (myDB.updateMovie(
+                    });
 
-                                    old_title, old_year, new_title, new_director, new_year, new_description, drawable.getBitmap(), new_length
-                            )) {
-                                Toast.makeText(getActivity(), "Данные фильма обновлены", Toast.LENGTH_SHORT).show();
+                    //Кнопка для обновления информации о фильме
+                    updateButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String old_title = selected_movie.getMovie_title();
+                            String old_year = selected_movie.getMovie_year();
+
+                            String new_title = MovieTitle.getText().toString();
+                            String new_director = Director.getText().toString();
+                            String new_year = Year.getText().toString();
+                            String new_description = Description.getText().toString();
+                            String new_length = Length.getText().toString();
+                            if (new_title.equals("")) {
+                                new_title = old_title;
+                            }
+                            if (new_director.equals("")) {
+                                new_director = selected_movie.getMovie_director();
+                            }
+                            if (new_year.equals("")) {
+                                new_year = selected_movie.getMovie_year();
+                            }
+                            if (new_description.equals("")) {
+                                new_description = selected_movie.getMovie_description();
+                            }
+                            if (new_length.equals("")) {
+                                new_length = selected_movie.getMovie_length();
+                            }
+                            try {
+                                BitmapDrawable drawable = (BitmapDrawable) Poster.getDrawable();
+                                if (myDB.updateMovie(
+
+                                        old_title, old_year, new_title, new_director, new_year, new_description, drawable.getBitmap(), new_length
+                                )) {
+                                    Toast.makeText(getActivity(), "Данные фильма обновлены", Toast.LENGTH_SHORT).show();
+                                    refreshMoviesList(myDB, movies, adapter, movieList);
+                                    dialog.dismiss();
+                                } else {
+                                    Toast.makeText(getActivity(), "Ошибка при обновлении", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (ClassCastException e) {
+                                // Обработка исключения
+                                e.printStackTrace();
+
+                                // Показать уведомление пользователю
+                                Toast.makeText(getActivity(), "Ошибка загрузки изображения", Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+                    });
+
+                    //Кнопка для удаления информации о фильме
+                    deleteButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String title = selected_movie.getMovie_title();
+                            String year = selected_movie.getMovie_year();
+                            if (myDB.deleteMovie(title, year)) {
+                                Toast.makeText(getActivity(), "Фильм удален", Toast.LENGTH_SHORT).show();
                                 refreshMoviesList(myDB, movies, adapter, movieList);
                                 dialog.dismiss();
                             } else {
-                                Toast.makeText(getActivity(), "Ошибка при обновлении", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Ошибка при удалении", Toast.LENGTH_SHORT).show();
                             }
-                        }catch (ClassCastException e){
-                            // Обработка исключения
-                            e.printStackTrace();
-
-                            // Показать уведомление пользователю
-                            Toast.makeText(getActivity(), "Ошибка загрузки изображения", Toast.LENGTH_SHORT).show();
                         }
+                    });
 
-
-                    }
-                });
-
-                //Кнопка для удаления информации о фильме
-                deleteButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String title = selected_movie.getMovie_title();
-                        String year = selected_movie.getMovie_year();
-                        if(myDB.deleteMovie(title,year)){
-                            Toast.makeText(getActivity(), "Фильм удален", Toast.LENGTH_SHORT).show();
-                            refreshMoviesList(myDB, movies, adapter, movieList);
-                            dialog.dismiss();
-                        }
-                        else{
-                            Toast.makeText(getActivity(), "Ошибка при удалении", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-                dialog.show();
+                    dialog.show();
+                }
             }
         });
-
-
 
 
     }

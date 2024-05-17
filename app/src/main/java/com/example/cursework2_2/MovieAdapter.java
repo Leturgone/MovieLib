@@ -2,6 +2,8 @@ package com.example.cursework2_2;
 
 import static android.app.Activity.RESULT_OK;
 
+import static androidx.core.app.ActivityCompat.startActivityForResult;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
@@ -37,6 +39,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private final TextView titleTextview;
         private final TextView directorTextview;
+
         private final TextView yearTextview;
         private final ImageView moviPosterImageview;
 
