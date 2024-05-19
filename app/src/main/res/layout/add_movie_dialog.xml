@@ -25,7 +25,7 @@
         android:id="@+id/editDirector"
         android:layout_width="130dp"
         android:layout_height="49dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Режиссер"
         android:inputType="text"
@@ -67,7 +67,7 @@
         android:id="@+id/editLength"
         android:layout_width="136dp"
         android:layout_height="49dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Длительность"
         android:inputType="text"
@@ -76,6 +76,20 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editDescription"
         app:layout_constraintTop_toBottomOf="@+id/editDescription" />
+
+    <EditText
+        android:id="@+id/editGenre"
+        android:layout_width="136dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Жанр"
+        android:inputType="text"
+        android:textColor="@color/some_white"
+        app:layout_constraintEnd_toStartOf="@+id/imgGallery"
+        app:layout_constraintHorizontal_bias="0.027"
+        app:layout_constraintStart_toStartOf="@+id/editDescription"
+        app:layout_constraintTop_toBottomOf="@+id/editLength" />
 
     <ImageView
         android:id="@+id/imgGallery"
@@ -97,9 +111,9 @@
         android:text="Сохранить"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.355"
+        app:layout_constraintHorizontal_bias="0.665"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editLength"
-        app:layout_constraintVertical_bias="0.519" />
+        app:layout_constraintTop_toBottomOf="@+id/imgGallery"
+        app:layout_constraintVertical_bias="0.344" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

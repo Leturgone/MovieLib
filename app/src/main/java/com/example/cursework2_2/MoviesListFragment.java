@@ -33,7 +33,7 @@ import java.util.List;
 
 
 public class MoviesListFragment extends Fragment {
-    EditText editMovieTitle, editDirector, editYear, editDescription, editLength;
+    EditText editMovieTitle, editDirector, editYear, editDescription, editLength, editGenre;
     Button saveButton;
     FloatingActionButton bidAddButton;
     ImageView editImage;
@@ -88,7 +88,6 @@ public class MoviesListFragment extends Fragment {
 
         searchView = view.findViewById(R.id.searchView);
         searchView.clearFocus(); //убирает курсор с компонента
-        List<Movie> temp = movies;
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -113,8 +112,7 @@ public class MoviesListFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.isEmpty()) {
-                    adapter.setFilteredMovies(movies);
-                    adapter.notifyDataSetChanged();
+                    refreshMoviesList(myDB);
                 }
                 return false;
             }
@@ -132,6 +130,7 @@ public class MoviesListFragment extends Fragment {
                 editYear = dialog.findViewById(R.id.editYear);
                 editDescription = dialog.findViewById(R.id.editDescription);
                 editLength = dialog.findViewById(R.id.editLength);
+                editGenre = dialog.findViewById(R.id.editGenre);
                 editImage = dialog.findViewById(R.id.imgGallery);
                 saveButton = dialog.findViewById(R.id.save_button);
 
@@ -143,13 +142,14 @@ public class MoviesListFragment extends Fragment {
                         String year = editYear.getText().toString();
                         String description = editDescription.getText().toString();
                         String length = editLength.getText().toString();
+                        String genre = editGenre.getText().toString();
                         try {
                             BitmapDrawable drawable = (BitmapDrawable) editImage.getDrawable();
-                            Movie movie = new Movie(0,title,director,year,description,drawable.getBitmap(),length);
+                            Movie movie = new Movie(0, title, director, year, description, drawable.getBitmap(), length, genre);
                             if (myDB.addMovie(movie)){
                                 movies.add(movie);
                                 adapter.notifyItemInserted(movies.size() - 1);
-                                refreshMoviesList(myDB,movies,adapter,movieList);
+                                refreshMoviesList(myDB);
                                 Toast.makeText(getActivity(), "Фильм сохранен", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
@@ -194,6 +194,7 @@ public class MoviesListFragment extends Fragment {
                     EditText Description = dialog.findViewById(R.id.REFeditDescription);
                     EditText Length = dialog.findViewById(R.id.REFeditLength);
                     ImageView Poster = dialog.findViewById(R.id.REFimgGallery);
+                    EditText Genre = dialog.findViewById(R.id.REFeditGenre);
 
                     Button updateButton = dialog.findViewById(R.id.update_button);
                     Button deleteButton = dialog.findViewById(R.id.delete_button);
@@ -205,6 +206,8 @@ public class MoviesListFragment extends Fragment {
                     Description.setHint(selected_movie.getMovie_description());
                     Length.setHint(selected_movie.getMovie_length());
                     Poster.setImageBitmap(selected_movie.getMovie_poster());
+                    Genre.setHint(selected_movie.getMovie_genre());
+
                     Poster.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -226,6 +229,7 @@ public class MoviesListFragment extends Fragment {
                             String new_year = Year.getText().toString();
                             String new_description = Description.getText().toString();
                             String new_length = Length.getText().toString();
+                            String new_genre = Genre.getText().toString();
                             if (new_title.equals("")) {
                                 new_title = old_title;
                             }
@@ -241,14 +245,19 @@ public class MoviesListFragment extends Fragment {
                             if (new_length.equals("")) {
                                 new_length = selected_movie.getMovie_length();
                             }
+                            if (new_genre.equals("")) {
+                                new_genre = selected_movie.getMovie_genre();
+                            }
+
                             try {
                                 BitmapDrawable drawable = (BitmapDrawable) Poster.getDrawable();
                                 if (myDB.updateMovie(
 
-                                        old_title, old_year, new_title, new_director, new_year, new_description, drawable.getBitmap(), new_length
+                                        old_title, old_year, new_title, new_director, new_year,
+                                        new_description, drawable.getBitmap(), new_length, new_genre
                                 )) {
                                     Toast.makeText(getActivity(), "Данные фильма обновлены", Toast.LENGTH_SHORT).show();
-                                    refreshMoviesList(myDB, movies, adapter, movieList);
+                                    refreshMoviesList(myDB);
                                     dialog.dismiss();
                                 } else {
                                     Toast.makeText(getActivity(), "Ошибка при обновлении", Toast.LENGTH_SHORT).show();
@@ -273,7 +282,7 @@ public class MoviesListFragment extends Fragment {
                             String year = selected_movie.getMovie_year();
                             if (myDB.deleteMovie(title, year)) {
                                 Toast.makeText(getActivity(), "Фильм удален", Toast.LENGTH_SHORT).show();
-                                refreshMoviesList(myDB, movies, adapter, movieList);
+                                refreshMoviesList(myDB);
                                 dialog.dismiss();
                             } else {
                                 Toast.makeText(getActivity(), "Ошибка при удалении", Toast.LENGTH_SHORT).show();
@@ -302,12 +311,12 @@ public class MoviesListFragment extends Fragment {
             }
         }
     }
-    private void refreshMoviesList(MyDatabaseHelper dbHelper,
-                                   List<Movie> movies, MovieAdapter adapter, RecyclerView
-                                           movieList) {
+    private void refreshMoviesList(MyDatabaseHelper dbHelper) {
         movies = dbHelper.getAllMovies(); // Загружаем обновленный список;
-        adapter = new MovieAdapter(movies);
-        movieList.setAdapter(adapter);
+        adapter.setFilteredMovies(movies);
+        adapter.notifyDataSetChanged();
+        //adapter = new MovieAdapter(movies);
+        //movieList.setAdapter(adapter);
     }
 
 }

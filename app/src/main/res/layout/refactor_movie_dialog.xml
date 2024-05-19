@@ -77,6 +77,22 @@
         app:layout_constraintStart_toStartOf="@+id/REFeditDescription"
         app:layout_constraintTop_toBottomOf="@+id/REFeditDescription" />
 
+    <EditText
+        android:id="@+id/REFeditGenre"
+        android:layout_width="156dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="56dp"
+        android:ems="10"
+        android:hint="Жанр"
+        android:inputType="text"
+        android:textColor="@color/some_white"
+        app:layout_constraintBottom_toTopOf="@+id/update_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.309"
+        app:layout_constraintStart_toEndOf="@+id/REFeditLength"
+        app:layout_constraintTop_toBottomOf="@+id/REFimgGallery"
+        app:layout_constraintVertical_bias="0.2" />
+
     <ImageView
         android:id="@+id/REFimgGallery"
         android:layout_width="133dp"

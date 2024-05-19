@@ -46,6 +46,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_DESCRIPTION ="movie_description";
     private static final String COLUMN_POSTER ="movie_poster";
     private static  final String COLUMN_LENGTH = "movie_length";
+    private static final  String COLUMN_GENRE = "movie_genre";
 
     public MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -103,6 +104,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_DESCRIPTION,movie.getMovie_description());
         cv.put(COLUMN_POSTER,ImageToBlob(movie.getMovie_poster()));
         cv.put(COLUMN_LENGTH,movie.getMovie_length());
+        cv.put(COLUMN_GENRE, movie.getMovie_genre());
         long result = db.insert(TABLE_NAME,null,cv);
         db.close();
         return  result !=-1;
@@ -121,7 +123,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public Movie findMovie(String title, String year){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME,
-                new String[]{COLUMN_ID,COLUMN_TITLE,COLUMN_DIRECTOR, COLUMN_YEAR,COLUMN_DESCRIPTION, COLUMN_POSTER,COLUMN_LENGTH },
+                new String[]{COLUMN_ID,COLUMN_TITLE,COLUMN_DIRECTOR, COLUMN_YEAR,COLUMN_DESCRIPTION, COLUMN_POSTER,COLUMN_LENGTH, COLUMN_GENRE },
                 COLUMN_TITLE + " =? AND+ "+ COLUMN_YEAR + " =?",new String[] { title, year },null,null,null);
         if(cursor != null && cursor.moveToFirst()){
             int id = cursor.getInt(0);
@@ -131,7 +133,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             String m_description = cursor.getString(4);
             Bitmap m_poster = BlobToImage(cursor.getBlob(5));
             String m_length = cursor.getString(6);
-            Movie movie = new Movie(id, m_title, m_director, m_year,m_description, m_poster,m_length);
+            String m_genre = cursor.getString(7);
+            Movie movie = new Movie(id, m_title, m_director, m_year,m_description, m_poster,m_length,m_genre);
             cursor.close();
             db.close();
             return movie;
@@ -158,7 +161,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 String m_description = cursor.getString(4);
                 Bitmap m_poster = BlobToImage(cursor.getBlob(5));
                 String m_length = cursor.getString(6);
-                Movie movie = new Movie(id, m_title, m_director, m_year,m_description, m_poster,m_length);
+                String m_genre = cursor.getString(7);
+                Movie movie = new Movie(id, m_title, m_director, m_year,m_description, m_poster,m_length, m_genre);
                 movieList.add(movie);
             }while(cursor.moveToNext());
         }
@@ -168,7 +172,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Метод для обновления фильма
-    public boolean updateMovie(String old_title, String old_year,String new_title, String new_director, String new_year,String new_description, Bitmap new_poster,String new_length){
+    public boolean updateMovie(String old_title, String old_year,String new_title, String new_director,
+                               String new_year,String new_description, Bitmap new_poster,
+                               String new_length, String new_genre){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_TITLE,new_title);
@@ -177,6 +183,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_DESCRIPTION,new_description);
         cv.put(COLUMN_POSTER,ImageToBlob(new_poster));
         cv.put(COLUMN_LENGTH,new_length);
+        cv.put(COLUMN_GENRE,new_genre);
         //Обновляем запись, где название и год фильма равны old_title и old_year
         int result = db.update(TABLE_NAME,cv,COLUMN_TITLE + " =? AND+ "+ COLUMN_YEAR + " =?",new String[] { old_title, old_year });
         db.close();
@@ -198,6 +205,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return bitmap;
     }
 
+    //Методы для работы с таблицей пользователей
     public  boolean addUser(User user) throws NoSuchAlgorithmException {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();

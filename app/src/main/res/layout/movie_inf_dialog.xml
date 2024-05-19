@@ -23,12 +23,13 @@
         android:id="@+id/infTitleTextView"
         android:layout_width="297dp"
         android:layout_height="33dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="Название фильма"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/infPosterImageView" />
 
@@ -52,13 +53,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.084" />
+        app:layout_constraintVertical_bias="0.045" />
 
     <TextView
         android:id="@+id/LengthLengthView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="Хронометраж:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -70,17 +71,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="Длительноть мин"
         app:layout_constraintStart_toEndOf="@+id/LengthLengthView"
         app:layout_constraintTop_toBottomOf="@+id/infDirectorTextView" />
 
     <TextView
+        android:id="@+id/GenreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Жанр:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/LengthLengthView"
+        app:layout_constraintTop_toBottomOf="@+id/LengthLengthView" />
+
+    <TextView
+        android:id="@+id/infGenretextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="12dp"
+        android:text="Название жанра"
+        app:layout_constraintStart_toEndOf="@+id/GenreTextView"
+        app:layout_constraintTop_toBottomOf="@+id/infLengthtextView" />
+
+    <TextView
         android:id="@+id/infDirectorTextView"
         android:layout_width="163dp"
         android:layout_height="19dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
         android:text="Имя режиссера"
         app:layout_constraintStart_toEndOf="@+id/infDirectorDirectortextView"
         app:layout_constraintTop_toBottomOf="@+id/infDateTextView" />
@@ -119,7 +141,7 @@
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/infTitleTextView"
-        app:layout_constraintVertical_bias="0.003" />
+        app:layout_constraintVertical_bias="0.016" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
