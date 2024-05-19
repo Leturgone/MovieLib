@@ -89,6 +89,7 @@ public class MoviesListFragment extends Fragment {
 
         searchView = view.findViewById(R.id.searchView);
         searchView.clearFocus(); //убирает курсор с компонента
+        List<Movie> temp = movies;
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -111,6 +112,10 @@ public class MoviesListFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                if (newText.isEmpty()) {
+                    adapter.setFilteredMovies(movies);
+                    adapter.notifyDataSetChanged();
+                }
                 return false;
             }
         });
