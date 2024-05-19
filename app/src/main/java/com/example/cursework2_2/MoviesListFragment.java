@@ -33,7 +33,7 @@ import java.util.List;
 
 
 public class MoviesListFragment extends Fragment {
-    EditText editMovieTitle, editDirector, editYear, editDescription, editLength, editOldTitle, editOldYear;
+    EditText editMovieTitle, editDirector, editYear, editDescription, editLength;
     Button saveButton;
     FloatingActionButton bidAddButton;
     ImageView editImage;
@@ -45,7 +45,6 @@ public class MoviesListFragment extends Fragment {
     private final  int GALLERY_REQUEST_CODE = 1000;
 
     public MoviesListFragment() {
-        // Required empty public constructor
     }
 
     public static MoviesListFragment newInstance(String param1, String param2) {
@@ -110,6 +109,7 @@ public class MoviesListFragment extends Fragment {
                 return true;
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.isEmpty()) {
