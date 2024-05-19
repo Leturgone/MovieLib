@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
-    private final List<Movie> movies;
+    private List<Movie> movies;
 
     public MovieAdapter(List<Movie> movies) {
         this.movies = movies;
@@ -60,6 +60,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         }
     }
 
+    public void setFilteredMovies(List<Movie> filteredMovies){
+        this.movies = filteredMovies;
+
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

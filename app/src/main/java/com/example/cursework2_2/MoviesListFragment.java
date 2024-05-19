@@ -3,6 +3,7 @@ package com.example.cursework2_2;
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +28,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,8 +38,10 @@ public class MoviesListFragment extends Fragment {
     FloatingActionButton bidAddButton;
     ImageView editImage;
     MyDatabaseHelper myDB;
+    MovieAdapter adapter;
     RecyclerView movieList;
     List<Movie> movies;
+    androidx.appcompat.widget.SearchView searchView;
     private final  int GALLERY_REQUEST_CODE = 1000;
 
     public MoviesListFragment() {
@@ -72,8 +77,7 @@ public class MoviesListFragment extends Fragment {
         //Получаем роль
         String username = sharedPreferences.getString("username", "");
 
-
-        MovieAdapter adapter = new MovieAdapter(movies);
+        adapter = new MovieAdapter(movies);
         movieList.setLayoutManager(new LinearLayoutManager(getActivity()));
         movieList.setAdapter(adapter);
 
@@ -82,6 +86,35 @@ public class MoviesListFragment extends Fragment {
         if(myDB.getRole(username).equals("viewer")){
             bidAddButton.setVisibility(View.GONE);
         }
+
+        searchView = view.findViewById(R.id.searchView);
+        searchView.clearFocus(); //убирает курсор с компонента
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                List<Movie> filterMovies = new ArrayList<>();
+                for (Movie movie: movies){
+                    if (movie.getMovie_title().toLowerCase().contains(query.toLowerCase())){
+                        filterMovies.add(movie);
+                    }
+                }
+                if (filterMovies.isEmpty()){
+                    Toast.makeText(getActivity(), "Фильм не найден", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    adapter.setFilteredMovies(filterMovies);
+                    adapter.notifyDataSetChanged();
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
         bidAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -249,6 +282,9 @@ public class MoviesListFragment extends Fragment {
 
 
     }
+
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
