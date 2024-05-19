@@ -61,8 +61,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Получение данных с полей ввода
 
-                String email, password, name;
-                email = editTextEmail.getText().toString();
+                String email, password;
+                email = editTextEmail.getText().toString().toLowerCase();
                 password = editTextPassword.getText().toString();
 
                 //Проверка на пустые поля
