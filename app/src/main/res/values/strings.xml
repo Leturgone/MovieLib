@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">CurseWork2_2</string>
     <string name="login">Войти</string>
-    <string name="email">Почта</string>
+    <string name="email">Логин</string>
     <string name="password">Пароль</string>
     <string name="login_btn_text">Войти</string>
     <string name="Registration">Зарегистрироваться</string>
