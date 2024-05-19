@@ -185,6 +185,7 @@ public class MoviesListFragment extends Fragment {
                 if(!myDB.getRole(username).equals("viewer")) {
                     Dialog dialog = new Dialog(getActivity());
                     dialog.setContentView(R.layout.refactor_movie_dialog);
+                    movies = adapter.getMovies();
                     Movie selected_movie = movies.get(position);
 
                     EditText MovieTitle = dialog.findViewById(R.id.REFeditMovieTitle);

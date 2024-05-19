@@ -59,6 +59,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             moviPosterImageview.setImageBitmap(movie.getMovie_poster());
         }
     }
+    public List<Movie> getMovies(){
+        return this.movies;
+    }
 
     public void setFilteredMovies(List<Movie> filteredMovies){
         this.movies = filteredMovies;
