@@ -71,8 +71,11 @@ public class MainActivity extends AppCompatActivity {
                 if(item.getItemId() == R.id.my_movies){
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
                             new MoviesListFragment()).commit();
-                }
-                else if(item.getItemId() == R.id.logout_btn){
+                } else if (item.getItemId() == R.id.help_frag) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment,
+                            new HelpFragment()).commit();
+
+                } else if(item.getItemId() == R.id.logout_btn){
                     Intent intent = new Intent(MainActivity.this,LoginActivity.class);
                     SharedPreferences sharedPreferences = getSharedPreferences("loginPref", MODE_PRIVATE);
                     SharedPreferences.Editor myEdit = sharedPreferences.edit();

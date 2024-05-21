@@ -47,7 +47,7 @@ public class MoviesListFragment extends Fragment {
     public MoviesListFragment() {
     }
 
-    public static MoviesListFragment newInstance(String param1, String param2) {
+    public static MoviesListFragment newInstance() {
         MoviesListFragment fragment = new MoviesListFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -73,7 +73,7 @@ public class MoviesListFragment extends Fragment {
         myDB = new MyDatabaseHelper(getActivity());
         movies = myDB.getAllMovies();
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("loginPref", MODE_PRIVATE);
-        //Получаем роль
+        //Получаем имя пользователя
         String username = sharedPreferences.getString("username", "");
 
         adapter = new MovieAdapter(movies);
@@ -81,7 +81,6 @@ public class MoviesListFragment extends Fragment {
         movieList.setAdapter(adapter);
 
         bidAddButton = view.findViewById(R.id.add_button);
-        String userRole = myDB.getRole(username);
         if(myDB.getRole(username).equals("viewer")){
             bidAddButton.setVisibility(View.GONE);
         }

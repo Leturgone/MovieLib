@@ -9,12 +9,8 @@
         android:title="@string/mymovies"
         android:textColor="@color/white"/>
     <item
-        android:id="@+id/search_menu"
-        android:title="@string/search"
-        android:textColor="@color/white"/>
-    <item
-        android:id="@+id/value_of_movies"
-        android:title="@string/valueofmovies"
+        android:id="@+id/help_frag"
+        android:title="Помощь"
         android:textColor="@color/white"/>
     <item
         android:id="@+id/logout_btn"

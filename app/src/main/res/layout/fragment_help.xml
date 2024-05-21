@@ -1,14 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".HelpFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:text="Спправка по использованию"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:text="Как узнать что за фильм?"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-black"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            android:text="Чтобы узнать информацию о фильме, нажмите на элемент списка."
+            android:textSize="23sp"
+            android:textColor="@color/white"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:text="Как найти фильм?"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-black"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            android:text="Чтобы быстро найти фильм в списке, нажмите на лупу и введите название, после чего нажмите на значок лупы на вашей клавиатуре. Чтобы вернуться ко всему списку нажите крестик в том же поле."
+            android:textSize="23sp"
+            android:textColor="@color/white"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:text="Как выйти из аккаунта?"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-black"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            android:text="Чтобы выйти из аккаунта нажмите на Выйти на выдвижной панели."
+            android:textSize="23sp"
+            android:textColor="@color/white"
+            />
+        <TextView
+            android:id="@+id/help_for_admin1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:text="Как добавить фильм?"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-black"
+            />
+        <TextView
+            android:id="@+id/help_for_admin2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            android:text="Чтобы добавить фильм нажмите на красуню кнопку с плюсиком, после чего в открывшемся окне введите данные фильма который хотите добавить. После этого он появится в конце списка"
+            android:textSize="23sp"
+            android:textColor="@color/white"
+            />
+        <TextView
+            android:id="@+id/help_for_admin3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:text="Как изменить данные фильма?"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-black"
+            />
+        <TextView
+            android:id="@+id/help_for_admin4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            android:text="Зажмите элемент списка с фильмом который хотите изменить. После этого введите новые данные в поля, которые хотите поменять. Чтобы изменить постер нажмите на картинку с постером и загрузите новый. После этого нажмите на кнопку Обновить."
+            android:textSize="23sp"
+            android:textColor="@color/white"
+            />
+        <TextView
+            android:id="@+id/help_for_admin5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:text="Как удалить фильм?"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-black"
+            />
+        <TextView
+            android:id="@+id/help_for_admin6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            android:text="Зажмите элемент списка с фильмом который хотите удлить. После этого нажмите кнопку Удалить."
+            android:textSize="23sp"
+            android:textColor="@color/white"
+            />
+    </LinearLayout>
+</ScrollView>
