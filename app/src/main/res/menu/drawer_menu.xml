@@ -6,7 +6,7 @@
         android:textColor="@color/white"/>
     <item
         android:id="@+id/my_movies"
-        android:title="@string/mymovies"
+        android:title="Фильмотека домашняя"
         android:textColor="@color/white"/>
     <item
         android:id="@+id/help_frag"
