@@ -36,6 +36,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
+            android:text="Как закрыть окно с информацией?"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-black"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="3dp"
+            android:text="Чтобы закрыть окно нажмите на кнопку назад в нижней панели вашего смартфона"
+            android:textSize="23sp"
+            android:textColor="@color/white"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:text="Как найти фильм?"
             android:textSize="25sp"
             android:textColor="@color/white"
