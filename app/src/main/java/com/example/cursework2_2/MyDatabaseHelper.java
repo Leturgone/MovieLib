@@ -194,8 +194,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private byte[] ImageToBlob(Bitmap bitmap){
         // Преобразование Bitmap в массив байтов
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-        return bos.toByteArray();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos);
+        byte[] byteArray = bos.toByteArray();
+        try {
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return byteArray;
     }
     //Метод для преобразования BLOB в картинку
     private  Bitmap BlobToImage(byte[] image){
