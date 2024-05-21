@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null) {
-            actionBar.setTitle("Моя фильмотека");
+            actionBar.setTitle("Фильмотека домашняя");
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
