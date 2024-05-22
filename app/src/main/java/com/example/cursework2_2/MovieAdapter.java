@@ -82,6 +82,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 TextView Length = dialog.findViewById(R.id.infLengthtextView);
                 ImageView Poster = dialog.findViewById(R.id.infPosterImageView);
                 TextView Genre = dialog.findViewById(R.id.infGenretextView);
+                TextView Actors = dialog.findViewById(R.id.infActorstextView);
 
                 MovieTitle.setText(selected_movie.getMovie_title());
                 Director.setText(selected_movie.getMovie_director());
@@ -90,6 +91,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 Length.setText(selected_movie.getMovie_length());
                 Poster.setImageBitmap(selected_movie.getMovie_poster());
                 Genre.setText(selected_movie.getMovie_genre());
+                Actors.setText(selected_movie.getMovie_actors());
 
                 dialog.show();
             }

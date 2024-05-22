@@ -13,8 +13,11 @@ public class Movie {
     private Bitmap movie_poster;
     private String movie_length;
     private String movie_genre;
+    private String movie_actors;
 
-    public Movie(int _id, String movie_title, String movie_director, String movie_year, String movie_description, Bitmap movie_poster, String movie_length, String movie_genre) {
+
+
+    public Movie(int _id, String movie_title, String movie_director, String movie_year, String movie_description, Bitmap movie_poster, String movie_length, String movie_genre, String movie_actors) {
         this._id = _id;
         this.movie_title = movie_title;
         this.movie_director = movie_director;
@@ -23,6 +26,7 @@ public class Movie {
         this.movie_poster = movie_poster;
         this.movie_length = movie_length;
         this.movie_genre = movie_genre;
+        this.movie_actors = movie_actors;
     }
 
     public int get_id() {
@@ -91,5 +95,13 @@ public class Movie {
 
     public void setMovie_genre(String movie_genre) {
         this.movie_genre = movie_genre;
+    }
+
+    public String getMovie_actors() {
+        return movie_actors;
+    }
+
+    public void setMovie_actors(String movie_actors) {
+        this.movie_actors = movie_actors;
     }
 }

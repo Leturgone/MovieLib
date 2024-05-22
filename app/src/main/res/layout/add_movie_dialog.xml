@@ -87,9 +87,23 @@
         android:inputType="text"
         android:textColor="@color/some_white"
         app:layout_constraintEnd_toStartOf="@+id/imgGallery"
-        app:layout_constraintHorizontal_bias="0.027"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editDescription"
         app:layout_constraintTop_toBottomOf="@+id/editLength" />
+
+    <EditText
+        android:id="@+id/editActors"
+        android:layout_width="136dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="Актеры"
+        android:inputType="text"
+        android:textColor="@color/some_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.318"
+        app:layout_constraintStart_toEndOf="@+id/editLength"
+        app:layout_constraintTop_toBottomOf="@+id/imgGallery" />
 
     <ImageView
         android:id="@+id/imgGallery"
@@ -113,7 +127,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.665"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgGallery"
-        app:layout_constraintVertical_bias="0.344" />
+        app:layout_constraintTop_toBottomOf="@+id/editActors"
+        app:layout_constraintVertical_bias="0.43" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

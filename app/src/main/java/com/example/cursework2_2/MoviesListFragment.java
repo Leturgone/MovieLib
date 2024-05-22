@@ -35,7 +35,7 @@ import java.util.List;
 
 
 public class MoviesListFragment extends Fragment {
-    EditText editMovieTitle, editDirector, editYear, editDescription, editLength, editGenre;
+    EditText editMovieTitle, editDirector, editYear, editDescription, editLength, editGenre, editActors;
     Button saveButton;
     FloatingActionButton bidAddButton;
     ImageView editImage;
@@ -133,6 +133,7 @@ public class MoviesListFragment extends Fragment {
                 editDescription = dialog.findViewById(R.id.editDescription);
                 editLength = dialog.findViewById(R.id.editLength);
                 editGenre = dialog.findViewById(R.id.editGenre);
+                editActors = dialog.findViewById(R.id.editActors);
                 editImage = dialog.findViewById(R.id.imgGallery);
                 saveButton = dialog.findViewById(R.id.save_button);
 
@@ -145,9 +146,10 @@ public class MoviesListFragment extends Fragment {
                         String description = editDescription.getText().toString();
                         String length = editLength.getText().toString();
                         String genre = editGenre.getText().toString();
+                        String actors = editActors.getText().toString();
                         try {
                             BitmapDrawable drawable = (BitmapDrawable) editImage.getDrawable();
-                            Movie movie = new Movie(0, title, director, year, description, drawable.getBitmap(), length, genre);
+                            Movie movie = new Movie(0, title, director, year, description, drawable.getBitmap(), length, genre, actors);
                             if (myDB.addMovie(movie)){
                                 movies.add(movie);
                                 adapter.notifyItemInserted(movies.size() - 1);
@@ -197,6 +199,7 @@ public class MoviesListFragment extends Fragment {
                     EditText Length = dialog.findViewById(R.id.REFeditLength);
                     ImageView Poster = dialog.findViewById(R.id.REFimgGallery);
                     EditText Genre = dialog.findViewById(R.id.REFeditGenre);
+                    EditText Actors = dialog.findViewById(R.id.REFeditActors);
 
                     Button updateButton = dialog.findViewById(R.id.update_button);
                     Button deleteButton = dialog.findViewById(R.id.delete_button);
@@ -209,6 +212,7 @@ public class MoviesListFragment extends Fragment {
                     Length.setHint(selected_movie.getMovie_length());
                     Poster.setImageBitmap(selected_movie.getMovie_poster());
                     Genre.setHint(selected_movie.getMovie_genre());
+                    Actors.setHint(selected_movie.getMovie_actors());
 
                     Poster.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -232,6 +236,7 @@ public class MoviesListFragment extends Fragment {
                             String new_description = Description.getText().toString();
                             String new_length = Length.getText().toString();
                             String new_genre = Genre.getText().toString();
+                            String new_actors = Actors.getText().toString();
                             if (new_title.equals("")) {
                                 new_title = old_title;
                             }
@@ -250,13 +255,17 @@ public class MoviesListFragment extends Fragment {
                             if (new_genre.equals("")) {
                                 new_genre = selected_movie.getMovie_genre();
                             }
+                            if (new_actors.equals("")) {
+                                new_actors = selected_movie.getMovie_actors();
+                            }
+
 
                             try {
                                 BitmapDrawable drawable = (BitmapDrawable) Poster.getDrawable();
                                 if (myDB.updateMovie(
 
                                         old_title, old_year, new_title, new_director, new_year,
-                                        new_description, drawable.getBitmap(), new_length, new_genre
+                                        new_description, drawable.getBitmap(), new_length, new_genre,new_actors
                                 )) {
                                     Toast.makeText(getActivity(), "Данные фильма обновлены", Toast.LENGTH_SHORT).show();
                                     refreshMoviesList(myDB);

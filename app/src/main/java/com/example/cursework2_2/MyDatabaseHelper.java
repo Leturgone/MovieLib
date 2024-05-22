@@ -106,6 +106,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             cv.put(COLUMN_POSTER, ImageToBlob(movie.getMovie_poster()));
             cv.put(COLUMN_LENGTH, movie.getMovie_length());
             cv.put(COLUMN_GENRE, movie.getMovie_genre());
+            cv.put(COLUMN_ACTORS, movie.getMovie_actors());
             long result = db.insert(TABLE_NAME, null, cv);
             db.close();
             return result != -1;
@@ -125,7 +126,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public Movie findMovie(String title, String year){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME,
-                new String[]{COLUMN_ID,COLUMN_TITLE,COLUMN_DIRECTOR, COLUMN_YEAR,COLUMN_DESCRIPTION, COLUMN_POSTER,COLUMN_LENGTH, COLUMN_GENRE },
+                new String[]{COLUMN_ID,COLUMN_TITLE,COLUMN_DIRECTOR, COLUMN_YEAR,COLUMN_DESCRIPTION, COLUMN_POSTER,COLUMN_LENGTH, COLUMN_GENRE, COLUMN_ACTORS },
                 COLUMN_TITLE + " =? AND+ "+ COLUMN_YEAR + " =?",new String[] { title, year },null,null,null);
         if(cursor != null && cursor.moveToFirst()){
             int id = cursor.getInt(0);
@@ -136,7 +137,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             Bitmap m_poster = BlobToImage(cursor.getBlob(5));
             String m_length = cursor.getString(6);
             String m_genre = cursor.getString(7);
-            Movie movie = new Movie(id, m_title, m_director, m_year,m_description, m_poster,m_length,m_genre);
+            String m_actor = cursor.getString(8);
+            Movie movie = new Movie(id, m_title, m_director, m_year,m_description, m_poster,m_length,m_genre, m_actor);
             cursor.close();
             db.close();
             return movie;
@@ -164,7 +166,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 Bitmap m_poster = BlobToImage(cursor.getBlob(5));
                 String m_length = cursor.getString(6);
                 String m_genre = cursor.getString(7);
-                Movie movie = new Movie(id, m_title, m_director, m_year,m_description, m_poster,m_length, m_genre);
+                String m_actor = cursor.getString(8);
+                Movie movie = new Movie(id, m_title, m_director, m_year,m_description, m_poster,m_length, m_genre, m_actor);
                 movieList.add(movie);
             }while(cursor.moveToNext());
         }
@@ -176,7 +179,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     //Метод для обновления фильма
     public boolean updateMovie(String old_title, String old_year,String new_title, String new_director,
                                String new_year,String new_description, Bitmap new_poster,
-                               String new_length, String new_genre){
+                               String new_length, String new_genre, String new_actors){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_TITLE,new_title);
@@ -186,6 +189,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_POSTER,ImageToBlob(new_poster));
         cv.put(COLUMN_LENGTH,new_length);
         cv.put(COLUMN_GENRE,new_genre);
+        cv.put(COLUMN_ACTORS, new_actors);
         //Обновляем запись, где название и год фильма равны old_title и old_year
         int result = db.update(TABLE_NAME,cv,COLUMN_TITLE + " =? AND+ "+ COLUMN_YEAR + " =?",new String[] { old_title, old_year });
         db.close();

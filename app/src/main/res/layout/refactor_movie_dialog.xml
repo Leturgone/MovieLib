@@ -81,17 +81,32 @@
         android:id="@+id/REFeditGenre"
         android:layout_width="156dp"
         android:layout_height="40dp"
-        android:layout_marginTop="56dp"
         android:ems="10"
         android:hint="Жанр"
         android:inputType="text"
         android:textColor="@color/some_white"
-        app:layout_constraintBottom_toTopOf="@+id/update_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.309"
+        app:layout_constraintHorizontal_bias="0.197"
         app:layout_constraintStart_toEndOf="@+id/REFeditLength"
+        app:layout_constraintTop_toBottomOf="@+id/REFeditActors"
+        app:layout_constraintVertical_bias="0.119" />
+
+
+    <EditText
+        android:id="@+id/REFeditActors"
+        android:layout_width="156dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="Жанр"
+        android:inputType="text"
+        android:textColor="@color/some_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintStart_toEndOf="@+id/REFeditDescription"
         app:layout_constraintTop_toBottomOf="@+id/REFimgGallery"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.082" />
 
     <ImageView
         android:id="@+id/REFimgGallery"
@@ -103,7 +118,7 @@
         app:layout_constraintHorizontal_bias="0.7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.031"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_upload_image" />
 
     <Button
