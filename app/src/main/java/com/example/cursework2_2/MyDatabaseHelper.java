@@ -45,6 +45,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_DESCRIPTION ="movie_description";
     private static final String COLUMN_POSTER ="movie_poster";
     private static  final String COLUMN_LENGTH = "movie_length";
+    private static final String COLUMN_ACTORS = "movie_actors";
     private static final  String COLUMN_GENRE = "movie_genre";
 
     public MyDatabaseHelper(@Nullable Context context) {
@@ -95,19 +96,21 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     //Метод для добавления фильма
     public  boolean addMovie(Movie movie){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(COLUMN_TITLE,movie.getMovie_title());
-        cv.put(COLUMN_DIRECTOR,movie.getMovie_director());
-        cv.put(COLUMN_YEAR,movie.getMovie_year());
-        cv.put(COLUMN_DESCRIPTION,movie.getMovie_description());
-        cv.put(COLUMN_POSTER,ImageToBlob(movie.getMovie_poster()));
-        cv.put(COLUMN_LENGTH,movie.getMovie_length());
-        cv.put(COLUMN_GENRE, movie.getMovie_genre());
-        long result = db.insert(TABLE_NAME,null,cv);
-        db.close();
-        return  result !=-1;
-
+        if(findMovie(movie.getMovie_title(),movie.getMovie_year()) == null) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues cv = new ContentValues();
+            cv.put(COLUMN_TITLE, movie.getMovie_title());
+            cv.put(COLUMN_DIRECTOR, movie.getMovie_director());
+            cv.put(COLUMN_YEAR, movie.getMovie_year());
+            cv.put(COLUMN_DESCRIPTION, movie.getMovie_description());
+            cv.put(COLUMN_POSTER, ImageToBlob(movie.getMovie_poster()));
+            cv.put(COLUMN_LENGTH, movie.getMovie_length());
+            cv.put(COLUMN_GENRE, movie.getMovie_genre());
+            long result = db.insert(TABLE_NAME, null, cv);
+            db.close();
+            return result != -1;
+        }
+        return false;
     }
 
     //Метод для удаления фильма

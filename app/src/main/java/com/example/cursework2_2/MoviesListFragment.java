@@ -156,8 +156,7 @@ public class MoviesListFragment extends Fragment {
                                 dialog.dismiss();
                             }
                             else{
-                                Toast.makeText(getActivity(), "Ошибка при сохранении", Toast.LENGTH_SHORT).show();
-
+                                Toast.makeText(getActivity(), "Такой фильм уже существует", Toast.LENGTH_SHORT).show();
                             }
                         }catch (ClassCastException e){
                             // Обработка исключения
