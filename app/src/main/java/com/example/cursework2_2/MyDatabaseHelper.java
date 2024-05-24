@@ -262,7 +262,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[] hashInBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
 
-        // bytes to hex
         String hashedPassword = new BigInteger(1, hashInBytes).toString(16);
 
         while (hashedPassword.length() < 32) {
