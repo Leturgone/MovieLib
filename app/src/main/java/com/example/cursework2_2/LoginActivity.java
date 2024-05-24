@@ -76,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 if (TextUtils.isEmpty(password)){
                     Toast.makeText(LoginActivity.this,"Введите пароль",Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 else if (!password.matches("^[A-Za-z0-9]+$") | password.matches("\\s")){

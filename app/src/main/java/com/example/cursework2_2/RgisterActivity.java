@@ -59,6 +59,7 @@ public class RgisterActivity extends AppCompatActivity {
                 }
                 if (TextUtils.isEmpty(password)){
                     Toast.makeText(RgisterActivity.this,"Введите пароль",Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 else if (!password.matches("^[A-Za-z0-9]+$") | password.matches("\\s")){
