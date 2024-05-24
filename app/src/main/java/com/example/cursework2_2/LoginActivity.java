@@ -53,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
         onRegButton = findViewById(R.id.on_reg_activity);
         progressBar = findViewById(R.id.logProgressBar);
         progressBar.setVisibility(View.GONE);
-        Button loveButton = findViewById(R.id.love_button);
         //Реализация кнопок
         logButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,14 +111,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,RgisterActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        loveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(intent);
                 finish();
             }
