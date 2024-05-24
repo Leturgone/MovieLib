@@ -147,27 +147,35 @@ public class MoviesListFragment extends Fragment {
                         String length = editLength.getText().toString();
                         String genre = editGenre.getText().toString();
                         String actors = editActors.getText().toString();
-                        try {
-                            BitmapDrawable drawable = (BitmapDrawable) editImage.getDrawable();
-                            Movie movie = new Movie(0, title, director, year, description, drawable.getBitmap(), length, genre, actors);
-                            if (myDB.addMovie(movie)){
-                                movies.add(movie);
-                                adapter.notifyItemInserted(movies.size() - 1);
-                                refreshMoviesList(myDB);
-                                Toast.makeText(getActivity(), "Фильм сохранен", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                            }
-                            else{
-                                Toast.makeText(getActivity(), "Такой фильм уже существует", Toast.LENGTH_SHORT).show();
-                            }
-                        }catch (ClassCastException e){
-                            // Обработка исключения
-                            e.printStackTrace();
-
-                            // Показать уведомление пользователю
-                            Toast.makeText(getActivity(), "Ошибка загрузки изображения", Toast.LENGTH_SHORT).show();
+                        if (title.trim().isEmpty()| director.trim().isEmpty() | year.trim().isEmpty() | year.trim().isEmpty()|
+                                description.trim().isEmpty()| length.trim().isEmpty()| genre.trim().isEmpty()| actors.trim().isEmpty()){
+                            Toast.makeText(getActivity(), "Поля заполнены не полностью", Toast.LENGTH_SHORT).show();
                         }
-                    }
+                        else  if(!length.contains(" мин")){
+                            Toast.makeText(getActivity(), "Хронометраж указывается в минутах", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            try {
+                                BitmapDrawable drawable = (BitmapDrawable) editImage.getDrawable();
+                                Movie movie = new Movie(0, title, director, year, description, drawable.getBitmap(), length, genre, actors);
+                                if (myDB.addMovie(movie)) {
+                                    movies.add(movie);
+                                    adapter.notifyItemInserted(movies.size() - 1);
+                                    refreshMoviesList(myDB);
+                                    Toast.makeText(getActivity(), "Фильм сохранен", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                } else {
+                                    Toast.makeText(getActivity(), "Такой фильм уже существует", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (ClassCastException e) {
+                                // Обработка исключения
+                                e.printStackTrace();
+
+                                // Показать уведомление пользователю
+                                Toast.makeText(getActivity(), "Ошибка загрузки изображения", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }                    }
                 });
                 editImage.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -237,28 +245,27 @@ public class MoviesListFragment extends Fragment {
                             String new_length = Length.getText().toString();
                             String new_genre = Genre.getText().toString();
                             String new_actors = Actors.getText().toString();
-                            if (new_title.equals("")) {
+                            if (new_title.trim().isEmpty()) {
                                 new_title = old_title;
                             }
-                            if (new_director.equals("")) {
+                            if (new_director.trim().isEmpty()) {
                                 new_director = selected_movie.getMovie_director();
                             }
-                            if (new_year.equals("")) {
+                            if (new_year.trim().isEmpty()) {
                                 new_year = selected_movie.getMovie_year();
                             }
-                            if (new_description.equals("")) {
+                            if (new_description.trim().isEmpty()) {
                                 new_description = selected_movie.getMovie_description();
                             }
-                            if (new_length.equals("")) {
+                            if (new_length.trim().isEmpty()) {
                                 new_length = selected_movie.getMovie_length();
                             }
-                            if (new_genre.equals("")) {
+                            if (new_genre.trim().isEmpty()) {
                                 new_genre = selected_movie.getMovie_genre();
                             }
-                            if (new_actors.equals("")) {
+                            if (new_actors.trim().isEmpty()) {
                                 new_actors = selected_movie.getMovie_actors();
                             }
-
 
                             try {
                                 BitmapDrawable drawable = (BitmapDrawable) Poster.getDrawable();
