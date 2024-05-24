@@ -93,7 +93,9 @@ public class LoginActivity extends AppCompatActivity {
                         myEdit.putString("username", user.getUser_login());
                         myEdit.apply();
                         startActivity(intent);
+                        finish();
                         Toast.makeText(LoginActivity.this,"Вход выполнен успешно",Toast.LENGTH_SHORT).show();
+
                     }
                     else{
                         Toast.makeText(LoginActivity.this,"Неверный логин или пароль",Toast.LENGTH_SHORT).show();
@@ -102,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,"Неверный логин или пароль",Toast.LENGTH_SHORT).show();
                     throw new RuntimeException(e);
                 }
+
 
             }
         });
