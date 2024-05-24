@@ -245,6 +245,7 @@ public class MoviesListFragment extends Fragment {
                             String new_length = Length.getText().toString();
                             String new_genre = Genre.getText().toString();
                             String new_actors = Actors.getText().toString();
+
                             if (new_title.trim().isEmpty()) {
                                 new_title = old_title;
                             }
@@ -257,6 +258,7 @@ public class MoviesListFragment extends Fragment {
                             if (new_description.trim().isEmpty()) {
                                 new_description = selected_movie.getMovie_description();
                             }
+
                             if (new_length.trim().isEmpty()) {
                                 new_length = selected_movie.getMovie_length();
                             }
@@ -267,25 +269,30 @@ public class MoviesListFragment extends Fragment {
                                 new_actors = selected_movie.getMovie_actors();
                             }
 
-                            try {
-                                BitmapDrawable drawable = (BitmapDrawable) Poster.getDrawable();
-                                if (myDB.updateMovie(
+                            if(!new_length.contains(" мин")){
+                                Toast.makeText(getActivity(), "Хронометраж указывается в минутах", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                try {
+                                    BitmapDrawable drawable = (BitmapDrawable) Poster.getDrawable();
+                                    if (myDB.updateMovie(
 
-                                        old_title, old_year, new_title, new_director, new_year,
-                                        new_description, drawable.getBitmap(), new_length, new_genre,new_actors
-                                )) {
-                                    Toast.makeText(getActivity(), "Данные фильма обновлены", Toast.LENGTH_SHORT).show();
-                                    refreshMoviesList(myDB);
-                                    dialog.dismiss();
-                                } else {
-                                    Toast.makeText(getActivity(), "Ошибка при обновлении", Toast.LENGTH_SHORT).show();
+                                            old_title, old_year, new_title, new_director, new_year,
+                                            new_description, drawable.getBitmap(), new_length, new_genre, new_actors
+                                    )) {
+                                        Toast.makeText(getActivity(), "Данные фильма обновлены", Toast.LENGTH_SHORT).show();
+                                        refreshMoviesList(myDB);
+                                        dialog.dismiss();
+                                    } else {
+                                        Toast.makeText(getActivity(), "Ошибка при обновлении", Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (ClassCastException e) {
+                                    // Обработка исключения
+                                    e.printStackTrace();
+
+                                    // Показать уведомление пользователю
+                                    Toast.makeText(getActivity(), "Ошибка загрузки изображения", Toast.LENGTH_SHORT).show();
                                 }
-                            } catch (ClassCastException e) {
-                                // Обработка исключения
-                                e.printStackTrace();
-
-                                // Показать уведомление пользователю
-                                Toast.makeText(getActivity(), "Ошибка загрузки изображения", Toast.LENGTH_SHORT).show();
                             }
 
 
